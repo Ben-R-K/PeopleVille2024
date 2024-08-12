@@ -11,14 +11,14 @@ public class BankSystem
 
     public void AddAccount(string name)
     {
-        var accountNumber = Guid.NewGuid().ToString();
-        var account = new Account(accountNumber, name, 0);
+        string accountNumber = Guid.NewGuid().ToString();
+        Account account = new Account(accountNumber, name, 0);
         _accounts.Add(account);
     }
 
     public void RemoveAccount(string accountNumber)
     {
-        var account = GetAccount(accountNumber);
+        Account account = GetAccount(accountNumber);
         _accounts.Remove(account);
     }
 
@@ -57,7 +57,7 @@ public class BankSystem
 
     public void PrintAllAccounts()
     {
-        foreach (var account in _accounts)
+        foreach (Account account in _accounts)
         {
             Console.WriteLine($"Account Number: {account.GetAccountNumber()}");
             Console.WriteLine($"Account Holder: {account.GetAccountHolder()}");
