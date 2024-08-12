@@ -1,0 +1,117 @@
+@startuml
++class "Village" {
+  - _random: RNG
+  + Villagers: List<BaseVillager>
+  + Locations: List<ILocation>
+  + VillagerNameLibrary: VillagerNames
+
+  -LoadVillagerCreatorFactories(): List<IVillagerCreator>
+  -CreateVillage(): Void
+  -LoadVillagerCreatorFactoryFromType(IEnumarable<Type> inputTypes, List<IVillagerCreator> outputVillagerCreators): Void
+  +ToString(): String
+}
+
+
+
++abstract class "BaseVillager" {
+  +Age: int
+  +FirstName: String
+  +LastName: String
+  +IsMale: Boolean
+  -_village: Village
+  +Home: ILocation?
+
+  +ToString(): String
+}
+
++class AdultVillager {
+}
+
++class ChildVillager {
+
+}
+
+
++class RNG {
+  -_rng: RNG?
+  -_random: Random
+  -padlock: Object
+
+ +Next(int max): int
+ +Next(int max, int min): int
+ +GetInstance(): RNG
+}
+
+
++class VillagerNames {
+  -_maleFirstNames: String[]
+  -_feMaleFirstNames: String[]
+  -_lastNames: String[]
+  _random: RNG
+  -_instance: VillagerNames
+
+  +GetInstance(): VillagerNames
+  -LoadNamesFromJsonFile(): Void
+  -GetRandomName(string[] names): String
+  +GetRandomFirstName(Boolean isMale): String
+  +GetRandomLastName(): String
+  +GetRandomNames(Boolean isMale): (String, String)
+}
+
+-class NamesData {
+  +MaleFirstNames: String[]
+  +FemaleFirstNames: String[]
+  +LastNames: String[]
+ }
+
+
++interface ILocation {
+  +Name: String
+}
+
++interface IHouse {
+  +Population: int
+  +MaxPopulation: int
+}
+
++interface IVillagerCreator {
+  +CreateVillager(Village: village): Boolean
+}
+
++interface VillagerCreatorAdult {
+  +CreateVillager(Village: village): Boolean
+  -FindHome(Village village): IHouse
+}
+
++interface VillagerCreatorChild {
+  +CreateVillager(Village: village): Boolean
+  -FindHome(Village village): IHouse?
+}
+
+
++class HomeLessVillageCreator {
+  +CreateVillager(Village: village): Boolean
+}
+
++class SimpleHouse {
+  -_Villagers: List<BaseVillager>
+  +Name: String
+  +Population: int
+  +MaxPopulation: int  
+}
+
+
+Village *-- BaseVillager
+BaseVillager o-- ILocation
+
+BaseVillager <|-- AdultVillager
+BaseVillager <|-- ChildVillager
+
+
+ILocation <|-- IHouse
+IHouse <|-- SimpleHouse
+
+Village o-- RNG
+VillagerNames o-- RNG
+Village o-- VillagerNames
+@enduml
