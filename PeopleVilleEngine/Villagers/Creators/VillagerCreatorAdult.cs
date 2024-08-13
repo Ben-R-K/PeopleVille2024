@@ -1,7 +1,10 @@
 ﻿using PeopleVilleEngine.Locations;
+using System.Runtime.CompilerServices;
 namespace PeopleVilleEngine.Villagers.Creators;
+using HungerSystem;
 public class VillagerCreatorAdult : IVillagerCreator
 {
+    private Hunger hunger;
     public bool CreateVillager(Village village)
     {
         var random = RNG.GetInstance();
@@ -22,6 +25,9 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         //Add to village
         village.Villagers.Add(adult);
+
+        hunger = new Hunger();
+
         return true;
     }
 
