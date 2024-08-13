@@ -1,14 +1,17 @@
 ﻿namespace PeopleVilleBankSystem;
+using Interactions;
 
 public class BankSystem
 {
     private string _name { get; set; }
     private List<Account> _accounts { get; set; }
 
-    public BankSystem(string name)
+    public BankSystem(string name, TimerClass timerClass)
     {
         _name = name;
         _accounts = new List<Account>();
+
+        timerClass.Subscribe(ApplyInterestToAllAccounts);
     }
 
     public void AddAccount(string name)
@@ -61,7 +64,7 @@ public class BankSystem
         GetAccount(accountNumber).Withdraw(amount);
     }
 
-    private void ApplyInterestToAllAccounts(object sender, EventArgs e)
+    private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds)
     {
         foreach (Account account in _accounts)
         {
