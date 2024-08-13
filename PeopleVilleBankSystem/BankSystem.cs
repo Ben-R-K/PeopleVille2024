@@ -11,7 +11,7 @@ public class BankSystem
         _name = name;
         _accounts = new List<Account>();
 
-        timerClass.Subscribe(ApplyInterestToAllAccounts);
+        timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
     }
 
     public void AddAccount(string name)
