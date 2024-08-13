@@ -1,9 +1,20 @@
 ﻿using PeopleVilleEngine;
+using Interactions;
+
+
+Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory.ToString());
 Console.WriteLine("PeopleVille");
+
+// A timer to keep track of the time in the village
+TimerClass worldTimer = new TimerClass();
 
 //Create village
 var village = new Village();
 Console.WriteLine(village.ToString());
+
+InteractionCreator interactionCreator = new InteractionCreator();
+interactionCreator.LoadInteractions();
+// interactionCreator.Interactions[0].Execute(village, village.Villagers[0]);
 
 
 //Print locations with villagers to screen
