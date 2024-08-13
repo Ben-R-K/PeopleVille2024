@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocationsEngine\LocationsEngine.csproj" />
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
   </ItemGroup>
 

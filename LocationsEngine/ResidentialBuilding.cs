@@ -14,7 +14,7 @@ namespace Ilocation
 
         public int MaxPopulation { get; set; }
 
-        protected ResidentialBuilding(string name, int maxPopulation)
+        public ResidentialBuilding(string name, int maxPopulation)
         {
             Name = name;
             CurrentPopulation = 0;

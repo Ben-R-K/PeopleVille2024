@@ -1,4 +1,5 @@
-﻿using PeopleVilleEngine;
+﻿using LocationsEngine.Creators;
+using PeopleVilleEngine;
 Console.WriteLine("PeopleVille");
 
 //Create village

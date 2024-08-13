@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ilocation
 {
-    interface ILocation
+    public interface ILocation
     {
         public string Name { get; }
 
