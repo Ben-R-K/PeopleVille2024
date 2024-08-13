@@ -2,10 +2,12 @@
 
 public class BankSystem
 {
+    private string _name { get; set; }
     private List<Account> _accounts { get; set; }
 
-    public BankSystem()
+    public BankSystem(string name)
     {
+        _name = name;
         _accounts = new List<Account>();
     }
 
@@ -64,5 +66,10 @@ public class BankSystem
             Console.WriteLine($"Balance: {account.GetBalance()}");
             Console.WriteLine();
         }
+    }
+
+    public override string ToString()
+    {
+        return _name;
     }
 }
