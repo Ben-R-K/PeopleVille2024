@@ -1,4 +1,4 @@
-﻿100namespace PeopleVilleEngine;
+﻿namespace PeopleVilleEngine;
 using PeopleVilleEngine.Villagers.Creators;
 using PeopleVilleEngine.Locations;
 using System.Reflection;
