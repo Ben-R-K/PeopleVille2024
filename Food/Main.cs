@@ -8,7 +8,7 @@ namespace Food
 
     }
 
-    internal class Food : IItem
+    internal class Food : IItem //New food class that implements IItem for more organized code and to override the default use method
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -17,15 +17,16 @@ namespace Food
         public double Weight { get; set; }
 
 
-        public void Use()
+
+        public void Use() // Default method for using an food item
         {
             try 
             {
-                //Eat(ID);
+                //Eat(ID); // Call hunger system to eat the food
             }
             catch (Exception e)
             {
-                Console.WriteLine("You can't eat that");
+                Console.WriteLine("You can't eat that"); // If the food can't be eaten
             }
         }
     }

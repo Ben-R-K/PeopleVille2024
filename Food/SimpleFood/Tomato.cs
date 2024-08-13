@@ -16,7 +16,7 @@ namespace Food.SimpleFood
             Name = "Tomato";
             Type = simpleFood;
             Price = 10;
-            Weight = 0.2;        
+            Weight = 0.2;
         }
     }
 }
