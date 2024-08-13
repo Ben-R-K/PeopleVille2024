@@ -1,8 +1,11 @@
 ﻿using PeopleVilleEngine.Locations;
+using HungerSystem;
+using HungerSystem.Interfaces;
 
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorChild : IVillagerCreator
 {
+    private Hunger hunger;
     public bool CreateVillager(Village village)
     {
         var home = FindHome(village);
@@ -14,9 +17,11 @@ public class VillagerCreatorChild : IVillagerCreator
         var first = home.Villagers().First(v => v.GetType() == typeof(AdultVillager));
         child.LastName = first.LastName;
 
+
         home.Villagers().Add(child);
         child.Home = home;
         village.Villagers.Add(child);
+        hunger = new Hunger();
         return true;
     }
 
