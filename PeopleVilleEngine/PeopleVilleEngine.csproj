@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)lib $(TargetDir)\lib /I /Y" />
+    <Exec Command='cp -R "$(ProjectDir)lib" "$(TargetDir)lib"' />
   </Target>
 
 </Project>
