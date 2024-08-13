@@ -27,6 +27,7 @@ foreach (var location in village.Locations)
     Console.WriteLine(locationStatus);
 }
 
+
 while (true){
     Thread.Sleep(1000);
     Console.WriteLine(worldTimer.ToString());

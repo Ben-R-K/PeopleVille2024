@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactions", "Interaction
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutDoorFitness", "Interaction_Libraies\OutDoorFitness\OutDoorFitness.csproj", "{C47AA690-D12C-4657-BAEC-A58594E5CF93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "food", "Interaction_Libraies\food\food.csproj", "{D565236F-D68A-4FFF-830A-01D417BF70E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

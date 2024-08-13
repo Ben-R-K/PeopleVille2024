@@ -5,6 +5,7 @@ namespace Interactions;
 
 public interface IInteraction
 {
+    public bool IsActivity { get; }
     public void Execute(Village village, BaseVillager villager, TimerClass worldTimer);
 }
 
@@ -36,10 +37,19 @@ public class InteractionCreator
                 BaseVillager randomVillager = _village.Villagers[_rng.Next(0, _village.Villagers.Count + 1)];
                 IInteraction interaction = interactions[_rng.Next(0, interactions.Count + 1)];
 
+                // Don't run interactions if the villager is busy. Find a new villager
                 while (randomVillager.IsBusy){
                     randomVillager = _village.Villagers[_rng.Next(0, _village.Villagers.Count + 1)];
                     Thread.Sleep(100);
                 }
+
+                // Don't randomly run not activities
+                while (!interaction.IsActivity){
+                    interaction = interactions[_rng.Next(0, interactions.Count + 1)];
+                    Thread.Sleep(100);
+                }
+
+
                 RunInteractions(randomVillager, interaction);
             }
         }, TimerClass.SubscribtionTypes.Hour);

@@ -5,6 +5,7 @@ namespace OutDoorFitness {
     public class Jumping: IInteraction
     {
         private RNG _rng;
+        public bool IsActivity { get { return true; } }
 
         public Jumping(RNG rng)
         {

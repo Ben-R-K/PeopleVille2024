@@ -2,7 +2,7 @@
 
 public class TimerClass
 {
-    private int speedUp = 400;
+    private int millisecondsPerSecond = 3;
     private int _seconds;
     private int _minutes;
     private int _hours;
@@ -41,14 +41,13 @@ public class TimerClass
     public void UpdateTime()
     {
         while (true) {
-            Thread.Sleep(1000);
-            _seconds += speedUp;
+            Thread.Sleep(millisecondsPerSecond);
+            _seconds += 1;
 
             int hours = _seconds/3600%24;
             int minutes = _seconds/60%60;
             int seconds = _seconds%60;
             int days = _seconds/86400;
-            Console.WriteLine(_seconds);
 
             if (minutes != _minutes){
                 _minutes = minutes;
@@ -72,7 +71,6 @@ public class TimerClass
             }
         }
     }
-
 
     public string Subscribe(Action<int, int, int, string> subscriber, SubscribtionTypes subscribtionType)
     {
