@@ -4,8 +4,7 @@ namespace PeopleVilleEngine.Villagers.Creators;
 using HungerSystem;
 public class VillagerCreatorAdult : IVillagerCreator
 {
-    private Hunger hunger;
-    public bool CreateVillager(Village village)
+    public BaseVillager CreateVillager(Village village)
     {
         var random = RNG.GetInstance();
         var adult = new AdultVillager(village, random.Next(18, 40));
@@ -26,9 +25,9 @@ public class VillagerCreatorAdult : IVillagerCreator
         //Add to village
         village.Villagers.Add(adult);
 
-        hunger = new Hunger(adult);
+        adult.hunger = new Hunger(adult);
 
-        return true;
+        return adult;
     }
 
     private IHouse FindHome(Village village)

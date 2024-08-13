@@ -10,6 +10,7 @@ public abstract class BaseVillager
     private Village _village;
     public ILocation? Home { get; set; } = null;
     public bool HasHome() => Home != null;
+    public Hunger hunger;
 
     protected BaseVillager(Village village)
     {
