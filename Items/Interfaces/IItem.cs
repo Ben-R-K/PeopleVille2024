@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Items.Interfaces
 {
-    internal interface IItem
+    public interface IItem
     {
         int ID { get; set; }
         string Name { get; set; }
-        string Type { get; set; }
-        int Price { get; set; }
-        int Weight { get; set; }
+        ItemType Type { get; set; }
+        double Price { get; set; }
+        double Weight { get; set; }
 
-
-        public void use();
+        public void Use();
     }
 }

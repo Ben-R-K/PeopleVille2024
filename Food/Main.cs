@@ -1,9 +1,14 @@
 ﻿using Items.Interfaces;
-using System;
+using Items;
 
-namespace Items
+namespace Food
 {
-    public class Item : IItem
+    public class Main
+    {
+
+    }
+
+    internal class Food : IItem
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -14,7 +19,14 @@ namespace Items
 
         public void Use()
         {
-            //This depends on item
+            try 
+            {
+                //Eat(ID);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("You can't eat that");
+            }
         }
     }
 }

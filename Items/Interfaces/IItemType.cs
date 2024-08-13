@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Items.Interfaces
 {
-    internal interface IItemType
+    public interface IItemType
     {
         int ID { get; set; }
         string Name { get; set; }
