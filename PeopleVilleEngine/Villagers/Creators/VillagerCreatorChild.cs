@@ -21,7 +21,9 @@ public class VillagerCreatorChild : IVillagerCreator
         home.Villagers().Add(child);
         child.Home = home;
         village.Villagers.Add(child);
-        hunger = new Hunger();
+
+        hunger = new Hunger(child);
+
         return true;
     }
 

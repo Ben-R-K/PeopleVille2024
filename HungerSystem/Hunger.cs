@@ -1,24 +1,22 @@
 ﻿using HungerSystem.Interfaces;
-using System;
 using System.Timers;
-using System.Collections.Generic;
 
 public class Hunger : IHunger
 {
     private int maxHunger = 100;
     private int currentHunger;
+    private int threshold = 50;
     private System.Timers.Timer hungerTimer;
-
     public int CurrentHunger => currentHunger;
     public int MaxHunger => maxHunger;
-
     public event EventHandler OnStarvation;
-
     private static Random random = new Random();
-    private Dictionary<string, Action<int>> OnHungerThresholdReached = new Dictionary<string, Action<int>>();
+    private (string, Action<BaseVillager>) OnHungerThresholdReached;
+    private BaseVillager _villager;
 
-    public Hunger()
+    public Hunger(BaseVillager villager)
     {
+        _villager = villager;
         // Start hunger et sted mellem 50 og 100
         currentHunger = random.Next(50, maxHunger + 1);
 
@@ -29,16 +27,10 @@ public class Hunger : IHunger
         hungerTimer.Enabled = true;
     }
 
-    public string Subscribe(Action<int> subscriber, int threshold)
+    public string Subscribe(Action<BaseVillager> subscriber)
     {
         string guid = Guid.NewGuid().ToString();
-        OnHungerThresholdReached.Add(guid, (currentHunger) =>
-        {
-            if (currentHunger <= threshold)
-            {
-                subscriber(currentHunger);
-            }
-        });
+        OnHungerThresholdReached = (guid, subscriber);
         return guid;
     }
 
@@ -47,33 +39,36 @@ public class Hunger : IHunger
         // Reducer hunger med 1% af maxHunger
         int baseDecreaseAmount = (int)(0.01 * maxHunger);
 
+        int newHunger;
+
         if (IsWorking)
         {
             // Hvis villager arbejder, falder hunger med en ekstra faktor, f.eks. 1.5 gange så hurtigt
-            DecreaseHunger((int)(baseDecreaseAmount * 1.5));
+            newHunger = DecreaseHunger((int)(baseDecreaseAmount * 1.5));
         }
         else
         {
-            DecreaseHunger(baseDecreaseAmount);
+            newHunger = DecreaseHunger(baseDecreaseAmount);
+        }
+        Console.WriteLine(newHunger);
+        if (newHunger <= threshold && OnHungerThresholdReached != default)
+        {
+            OnHungerThresholdReached.Item2(_villager);
         }
     }
 
     public bool IsWorking { get; set; }
 
-    public void DecreaseHunger(int amount)
+    public int DecreaseHunger(int amount)
     {
         currentHunger = Math.Max(0, currentHunger - amount);
-
-        // Udløs abonnenter, hvis deres betingelser er opfyldt
-        foreach (var subscriber in OnHungerThresholdReached.Values)
-        {
-            subscriber(currentHunger);
-        }
 
         if (currentHunger == 0)
         {
             OnStarvation?.Invoke(this, EventArgs.Empty);
         }
+
+        return currentHunger;
     }
 
     public void IncreaseHunger(int amount)
