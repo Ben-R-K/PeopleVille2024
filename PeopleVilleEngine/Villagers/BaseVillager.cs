@@ -11,6 +11,7 @@ public abstract class BaseVillager
     public ILocation? Home { get; set; } = null;
     public bool HasHome() => Home != null;
     public bool IsBusy;
+    public Hunger hunger;
 
     protected BaseVillager(Village village)
     {
