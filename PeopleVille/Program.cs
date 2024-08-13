@@ -15,7 +15,6 @@ Console.WriteLine(village.ToString());
 InteractionCreator interactionCreator = new InteractionCreator(village, worldTimer, RNG.GetInstance());
 interactionCreator.LoadInteractions();
 
-
 //Print locations with villagers to screen
 foreach (var location in village.Locations)
 {

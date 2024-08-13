@@ -14,9 +14,9 @@ namespace OutDoorFitness {
 
         public void Execute(Village village, BaseVillager villager, TimerClass worldTimer)
         {
-            Console.WriteLine($"{villager.ToString()} started running at {worldTimer.ToString()}");
+            Console.WriteLine($"{worldTimer.ToString()}  --  {villager.ToString()} is taking a run");
             worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
-                Console.WriteLine($"{villager.ToString()} finished their run at {worldTimer.ToString()}");
+                Console.WriteLine($"{worldTimer.ToString()}  --  {villager.ToString()} finished their run");
                 villager.IsBusy = false;
                 worldTimer.Unsubscribe(id, TimerClass.SubscribtionTypes.Hour);
             }, TimerClass.SubscribtionTypes.Hour);
