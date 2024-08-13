@@ -5,7 +5,7 @@ namespace Interactions;
 
 public interface IInteraction
 {
-    public void Execute(BaseVillager villager, Village village);
+    public void Execute(Village village, BaseVillager villager);
 }
 
 public class InteractionCreator

@@ -4,9 +4,9 @@ using PeopleVilleEngine;
 namespace OutDoorFitness {
     public class Running: IInteraction
     {
-        public void Execute(BaseVillager villager, Village village)
+        public void Execute(Village village, BaseVillager villager)
         {
-            Console.WriteLine("Playing together");
+            Console.WriteLine(villager.Name + " is running");
         }
     }
 }
