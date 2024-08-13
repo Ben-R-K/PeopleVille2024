@@ -13,8 +13,12 @@ public class BankSystem
 
     public void AddAccount(string name)
     {
+        Random random = new Random();
+
+        double interestRate = random.NextDouble() * (0.1 - 0.01) + 0.01;
+
         string accountNumber = Guid.NewGuid().ToString();
-        Account account = new Account(accountNumber, name, 0);
+        Account account = new Account(accountNumber, name, 0, interestRate);
         _accounts.Add(account);
     }
 
@@ -55,6 +59,16 @@ public class BankSystem
     public void Withdraw(string accountNumber, double amount)
     {
         GetAccount(accountNumber).Withdraw(amount);
+    }
+
+    private void ApplyInterestToAllAccounts(object sender, EventArgs e)
+    {
+        foreach (Account account in _accounts)
+        {
+            account.ApplyInterest();
+        }
+
+        Console.WriteLine("Interest applied to all accounts.");
     }
 
     public void PrintAllAccounts()
