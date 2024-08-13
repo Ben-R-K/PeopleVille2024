@@ -30,7 +30,9 @@ public class TimerClass
         _seconds = 0;
         _minutes = 0;
         _hours = 0;
-        OnTimeChange = new List<Action<int, int, int>>();
+        OnHourChange = new List<Action<int, int, int>>();
+        OnMinuteChange = new List<Action<int, int, int>>();
+        OnDayChange = new List<Action<int, int, int>>();
         Task.Run(() => UpdateTime()); 
     }
 
