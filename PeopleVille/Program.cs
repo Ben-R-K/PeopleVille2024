@@ -7,7 +7,6 @@ Console.WriteLine("PeopleVille");
 
 // A timer to keep track of the time in the village
 TimerClass worldTimer = new TimerClass();
-worldTimer.Subscribe():
 //Create village
 var village = new Village();
 Console.WriteLine(village.ToString());
