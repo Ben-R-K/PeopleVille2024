@@ -13,7 +13,7 @@ namespace Ilocation
         /// <summary>
         /// The current amount of people in this location.
         /// </summary>
-        public int CurrentPopulation { get; }
+        public List<BaseVillager> CurrentPopulation { get; }
         /// <summary>
         /// The max amount of people that can be in this location.
         /// </summary>

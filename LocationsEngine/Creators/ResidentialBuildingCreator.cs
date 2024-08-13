@@ -14,7 +14,8 @@ namespace LocationsEngine.Creators
 
         public ResidentialBuildingCreator()
         {
-            RBs = JsonSerializer.Deserialize<List<ResidentialBuilding>>(File.ReadAllText("ResidentialBuildings.json"));
+            string s = File.ReadAllText("ResidentialBuildings.json");
+            RBs = JsonSerializer.Deserialize<List<ResidentialBuilding>>(s);
             RBs.Add(new ResidentialBuilding("A House", 10));
         }
     }

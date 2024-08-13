@@ -10,14 +10,17 @@ namespace Ilocation
     {
         public string Name { get; set; }
 
-        public int CurrentPopulation { get; set; }
+        public List<BaseVillager> CurrentPopulation { get; set; }
+
+        public List<BaseVillager> LivingHere { get; set; }
 
         public int MaxPopulation { get; set; }
 
         public ResidentialBuilding(string name, int maxPopulation)
         {
             Name = name;
-            CurrentPopulation = 0;
+            CurrentPopulation = new List<BaseVillager>();
+            LivingHere = new List<BaseVillager>();
             MaxPopulation = maxPopulation;
         }
     }
