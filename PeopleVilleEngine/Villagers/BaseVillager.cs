@@ -19,6 +19,7 @@ public abstract class BaseVillager
         IsMale = RNG.GetInstance().Next(0, 2) == 0;
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
         IsBusy = false;
+        hunger = new Hunger(this);
     }
 
     public override string ToString()

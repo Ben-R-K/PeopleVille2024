@@ -1,5 +1,5 @@
-﻿using HungerSystem.Interfaces;
-using System.Timers;
+﻿using System.Timers;
+using HungerSystem.Interfaces;
 
 public class Hunger : IHunger
 {
@@ -11,10 +11,10 @@ public class Hunger : IHunger
     public int MaxHunger => maxHunger;
     public event EventHandler OnStarvation;
     private static Random random = new Random();
-    private (string, Action<BaseVillager>) OnHungerThresholdReached;
-    private BaseVillager _villager;
+    private (string, Action<dynamic>) OnHungerThresholdReached;
+    private dynamic _villager;
 
-    public Hunger(BaseVillager villager)
+    public Hunger(dynamic villager)
     {
         _villager = villager;
         // Start hunger et sted mellem 50 og 100
@@ -27,7 +27,7 @@ public class Hunger : IHunger
         hungerTimer.Enabled = true;
     }
 
-    public string Subscribe(Action<BaseVillager> subscriber)
+    public string Subscribe(Action<dynamic> subscriber)
     {
         string guid = Guid.NewGuid().ToString();
         OnHungerThresholdReached = (guid, subscriber);
@@ -50,7 +50,7 @@ public class Hunger : IHunger
         {
             newHunger = DecreaseHunger(baseDecreaseAmount);
         }
-        Console.WriteLine(newHunger);
+
         if (newHunger <= threshold && OnHungerThresholdReached != default)
         {
             OnHungerThresholdReached.Item2(_villager);

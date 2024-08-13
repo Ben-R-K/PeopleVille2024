@@ -2,7 +2,7 @@
 
 public class TimerClass
 {
-    private int millisecondsPerSecond = 3;
+    private int millisecondsPerSecond = 2;
     private int _seconds;
     private int _minutes;
     private int _hours;
@@ -20,8 +20,11 @@ public class TimerClass
 
     public override string ToString()
     {
-        string hours = (_seconds/3600%24).ToString().PadLeft(2, '0');
-        string minutes = (_seconds/60%60).ToString().PadLeft(2, '0');
+        // string hours = (_seconds/3600%24).ToString().PadLeft(2, '0');
+        // string minutes = (_seconds/60%60).ToString().PadLeft(2, '0');
+
+        string hours = _hours.ToString().PadLeft(2, '0');
+        string minutes = _minutes.ToString().PadLeft(2, '0');
         string seconds = (_seconds%60).ToString().PadLeft(2, '0');
         // return $"{hours}:{minutes}:{seconds}";
         return $"{hours}:{minutes}:{seconds}";

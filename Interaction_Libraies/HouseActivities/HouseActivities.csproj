@@ -6,9 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-    <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Interactions\Interactions.csproj" />
     <ProjectReference Include="..\..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
-    <ProjectReference Include="..\..\HungerSystem\HungerSystem.csproj" />
   </ItemGroup>
 </Project>

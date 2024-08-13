@@ -6,7 +6,7 @@ namespace Interactions;
 public interface IInteraction
 {
     public bool IsActivity { get; }
-    public void Execute(Village village, BaseVillager villager, TimerClass worldTimer);
+    public void Execute(BaseVillager villager);
 }
 
 public class InteractionCreator
@@ -28,7 +28,7 @@ public class InteractionCreator
     }
 
     private void RunInteractions(BaseVillager villager, IInteraction interaction){
-        interaction.Execute(_village, villager, _worldTimer);
+        interaction.Execute(villager);
     }
 
     private void RunInteractions(){
@@ -48,8 +48,7 @@ public class InteractionCreator
                     interaction = interactions[_rng.Next(0, interactions.Count + 1)];
                     Thread.Sleep(100);
                 }
-
-
+                randomVillager.IsBusy = true;
                 RunInteractions(randomVillager, interaction);
             }
         }, TimerClass.SubscribtionTypes.Hour);
@@ -86,7 +85,7 @@ public class InteractionCreator
         foreach (var type in createrTypes)
         {
             Console.WriteLine($"Interaction Creeater loaded: {type}");
-            outputInteractions.Add((IInteraction)Activator.CreateInstance(type, new object[] { _rng }));
+            outputInteractions.Add((IInteraction)Activator.CreateInstance(type, new object[] { _rng, _village, _worldTimer }));
         }
     }
 }

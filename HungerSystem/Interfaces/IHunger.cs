@@ -12,6 +12,6 @@
         int DecreaseHunger(int amount);
         void IncreaseHunger(int amount);
         void Eat(IFood food);
-        string Subscribe(Action<BaseVillager> subscriber);
+        string Subscribe(Action<dynamic> subscriber);
     }
 }
