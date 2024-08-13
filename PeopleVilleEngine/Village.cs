@@ -10,7 +10,7 @@ public class Village
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
-
+    
     public Village()
     {
         Console.WriteLine("Creating villager");
