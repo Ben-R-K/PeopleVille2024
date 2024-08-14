@@ -6,7 +6,7 @@ namespace Items
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public ItemType Type { get; set; }
+        public string Type { get; }
         public double Price { get; set; }
         public double Weight { get; set; }
 

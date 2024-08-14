@@ -4,7 +4,7 @@
     {
         int ID { get; set; }
         string Name { get; set; }
-        ItemType Type { get; set; }
+        string Type { get; }
         double Price { get; set; }
         double Weight { get; set; } // in kg
 
