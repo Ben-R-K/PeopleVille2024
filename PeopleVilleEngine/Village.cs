@@ -1,6 +1,6 @@
-﻿namespace LocationsEngine;
-using LocationsEngine.Villagers.Creators;
+﻿namespace PeopleVilleEngine;
 using System.Reflection;
+using PeopleVilleEngine.Villagers.Creators;
 using LocationsEngine;
 using System.Linq;
 
@@ -8,7 +8,8 @@ public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
     public List<BaseVillager> Villagers { get; } = new();
-    public List<ILocation> Locations { get; } = new();
+    public List<FunktionalBuilding> Locations { get; } = new();
+    public List<ResidentialBuilding> Homes { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
 
     public Village()
@@ -16,7 +17,6 @@ public class Village
         Console.WriteLine("Creating villager");
         CreateVillage();
     }
-
 
     private void CreateVillage()
     {
@@ -76,6 +76,6 @@ public class Village
 
     public override string ToString()
     {
-        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
+        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.Home == null)} are homeless.";
     }
 }

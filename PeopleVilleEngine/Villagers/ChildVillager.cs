@@ -1,6 +1,7 @@
-﻿namespace LocationsEngine.Villagers;
+﻿namespace PeopleVilleEngine.Villagers;
 public class ChildVillager : BaseVillager
 {
+    public AdultVillager Parent { get; set; }
     public ChildVillager(Village village) : base(village)
     {
         Age = RNG.GetInstance().Next(0, 18);

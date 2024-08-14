@@ -14,14 +14,7 @@ namespace LocationsEngine.Creators
 
         public ResidentialBuildingsCreator()
         {
-            try
-            {
-                RBs = JsonSerializer.Deserialize<List<ResidentialBuilding>>(File.ReadAllText("ResidentialBuildings.json"));
-            }
-            catch (FileNotFoundException ex)
-            {
-                RBs.Add(new ResidentialBuilding("A House", 10));
-            }
+
         }
         /// <summary>
         /// creates and populates the ResitentialBuildings.json file
@@ -42,6 +35,18 @@ namespace LocationsEngine.Creators
             RBs.Add(B_110);
             
             File.WriteAllText("ResidentialBuildings.json", JsonSerializer.Serialize(RBs));
+        }
+
+        public void CreateBuildings()
+        {
+            try
+            {
+                RBs = JsonSerializer.Deserialize<List<ResidentialBuilding>>(File.ReadAllText("ResidentialBuildings.json"));
+            }
+            catch (FileNotFoundException ex)
+            {
+                RBs.Add(new ResidentialBuilding("A House", 10));
+            }
         }
     }
 }

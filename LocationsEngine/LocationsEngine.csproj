@@ -10,8 +10,4 @@
     <Folder Include="lib\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
-  </ItemGroup>
-
 </Project>

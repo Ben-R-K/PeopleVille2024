@@ -10,18 +10,11 @@ namespace LocationsEngine.Creators
 {
     public class FunktionalBuildingsCreator
     {
-        List<FunktionalBuilding> FBs = new List<FunktionalBuilding>();
+        public List<FunktionalBuilding> FBs = new List<FunktionalBuilding>();
 
         public FunktionalBuildingsCreator()
         {
-            //try
-            //{
-            //    FBs = JsonSerializer.Deserialize<List<FunktionalBuilding>>(File.ReadAllText("FunktionalBuildings.json"));
-            //}
-            //catch (FileNotFoundException ex)
-            //{
-                
-            //}
+            
         }
 
         /// <summary>
@@ -43,6 +36,18 @@ namespace LocationsEngine.Creators
             FBs.Add(TheCompany);
 
             File.WriteAllText("FunktionalBuildings.json", JsonSerializer.Serialize(FBs));
+        }
+
+        public void CreateBuildings()
+        {
+            try
+            {
+                FBs = JsonSerializer.Deserialize<List<FunktionalBuilding>>(File.ReadAllText("FunktionalBuildings.json"));
+            }
+            catch (FileNotFoundException ex)
+            {
+
+            }
         }
     }
 }

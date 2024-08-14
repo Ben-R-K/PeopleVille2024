@@ -1,4 +1,4 @@
-﻿namespace LocationsEngine;
+﻿namespace PeopleVilleEngine;
 sealed public class RNG
 {
     private static RNG? _rng = null;

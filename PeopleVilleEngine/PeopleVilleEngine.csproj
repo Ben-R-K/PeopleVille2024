@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocationsEngine\LocationsEngine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="lib\names.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

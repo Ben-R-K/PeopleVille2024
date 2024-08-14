@@ -1,5 +1,4 @@
-﻿using LocationsEngine;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +12,7 @@ namespace LocationsEngine
 
         public LocationTypes LocationType { get; set; }
 
-        public List<BaseVillager> CurrentPopulation { get; set; }
+        public int CurrentPopulation { get; set; }
 
         public int MaxPopulation { get; set; }
 
@@ -21,7 +20,6 @@ namespace LocationsEngine
         {
             Name = name;
             LocationType = locationType;
-            CurrentPopulation = new List<BaseVillager>();
             MaxPopulation = maxPopulation;
         }
     }

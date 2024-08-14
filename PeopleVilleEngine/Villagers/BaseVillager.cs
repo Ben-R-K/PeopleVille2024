@@ -1,5 +1,5 @@
 ﻿using LocationsEngine;
-using LocationsEngine.Locations;
+using PeopleVilleEngine;
 
 public abstract class BaseVillager
 {
@@ -8,8 +8,8 @@ public abstract class BaseVillager
     public string LastName { get; set; }
     public bool IsMale { get; set; }
     private Village _village;
-    public ILocation? Home { get; set; } = null;
-    public bool HasHome() => Home != null;
+    public ILocation? CurrentLocation { get; set; } = null;
+    public ResidentialBuilding? Home {  get; set; }
 
     protected BaseVillager(Village village)
     {
