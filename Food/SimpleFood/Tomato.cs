@@ -23,6 +23,7 @@ namespace Food.SimpleFood
             {
                 Tomato tomato = new Tomato();
                 villager.hunger.IncreaseHunger(tomato.Nutrition);
+                villager.RemoveItem(tomato);
             }
             catch (Exception e)
             {
