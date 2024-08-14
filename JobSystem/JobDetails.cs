@@ -24,11 +24,11 @@ namespace JobSystem
         {
             if (isMale)
             {
-                return random.Next(500, 1001); // løn mænd
+                return random.Next(500, 1001); // Salary for males
             }
             else
             {
-                return random.Next(300, 801); // løn kvinder
+                return random.Next(300, 801); // Salary for females
             }
         }
     }
