@@ -1,8 +1,10 @@
 ﻿using PeopleVilleEngine.Locations;
+using System.Runtime.CompilerServices;
 namespace PeopleVilleEngine.Villagers.Creators;
+using HungerSystem;
 public class VillagerCreatorAdult : IVillagerCreator
 {
-    public bool CreateVillager(Village village)
+    public BaseVillager CreateVillager(Village village)
     {
         var random = RNG.GetInstance();
         var adult = new AdultVillager(village, random.Next(18, 40));
@@ -22,7 +24,10 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         //Add to village
         village.Villagers.Add(adult);
-        return true;
+
+        adult.hunger = new Hunger(adult);
+
+        return adult;
     }
 
     private IHouse FindHome(Village village)

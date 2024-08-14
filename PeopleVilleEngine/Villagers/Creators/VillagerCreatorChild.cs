@@ -1,12 +1,14 @@
 ﻿using PeopleVilleEngine.Locations;
+using HungerSystem;
+using HungerSystem.Interfaces;
 
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorChild : IVillagerCreator
 {
-    public bool CreateVillager(Village village)
+    public BaseVillager CreateVillager(Village village)
     {
         var home = FindHome(village);
-        if (home == null) return false;
+        if (home == null) return null;
 
         var random = RNG.GetInstance();
         var child = new ChildVillager(village);
@@ -14,10 +16,14 @@ public class VillagerCreatorChild : IVillagerCreator
         var first = home.Villagers().First(v => v.GetType() == typeof(AdultVillager));
         child.LastName = first.LastName;
 
+
         home.Villagers().Add(child);
         child.Home = home;
         village.Villagers.Add(child);
-        return true;
+
+        child.hunger = new Hunger(child);
+
+        return child;
     }
 
     private IHouse? FindHome(Village village)

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,6 +10,10 @@
     <Compile Remove="Library\**" />
     <EmbeddedResource Remove="Library\**" />
     <None Remove="Library\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HungerSystem\HungerSystem.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +29,9 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)lib $(TargetDir)\lib /I /Y" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' />
+	</Target>
+
 
 </Project>

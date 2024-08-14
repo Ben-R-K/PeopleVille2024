@@ -12,6 +12,8 @@ public abstract class BaseVillager
     private Village _village;
     public ILocation? Home { get; set; } = null;
     public bool HasHome() => Home != null;
+    public bool IsBusy;
+    public Hunger hunger;
     private Inventory _inventory;
 
     protected BaseVillager(Village village)
@@ -19,6 +21,8 @@ public abstract class BaseVillager
         _village = village;
         IsMale = RNG.GetInstance().Next(0, 2) == 0;
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
+        IsBusy = false;
+        hunger = new Hunger(this);
         _inventory = new Inventory(Age);
     }
 
