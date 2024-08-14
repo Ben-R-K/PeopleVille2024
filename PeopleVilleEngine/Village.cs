@@ -16,13 +16,12 @@ public class Village
     {
         Console.WriteLine("Creating villager");
         SetupVillage();
-        
     }
 
 
     private void SetupVillage()
     {
-        var villagers = _random.Next(10, 24);
+        var villagers = _random.Next(25, 100);
         Console.ForegroundColor = ConsoleColor.Red;
 
         var villageCreators = LoadVillagerCreatorFactories();

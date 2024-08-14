@@ -36,7 +36,6 @@ public class Eating: IInteraction
             return;
         }
 
-        // IFood food;
         string foodName = food.Name;
 
         int time = _rng.Next(2, 25);
