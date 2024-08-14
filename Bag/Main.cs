@@ -12,9 +12,10 @@ namespace Bag
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public ItemType Type { get; set; }
+        public string Type { get { return "bag"; } }
         public double Price { get; set; }
         public double Weight { get; set; }
+
 
         public void Use()
         {

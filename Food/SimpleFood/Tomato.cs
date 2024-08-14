@@ -8,13 +8,11 @@ namespace Food.SimpleFood
 
         public Tomato()
         {
-            ItemType type = new ItemType(1, "Food");
-
             ID = 1; 
             Name = "Tomato";
-            Type = type;
             Price = 10;
             Weight = 0.2;
+            Nutrition = 10;
         }
     }
 }
