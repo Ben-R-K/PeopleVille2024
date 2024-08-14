@@ -1,4 +1,6 @@
 ﻿using Items;
+using HungerSystem;
+using PeopleVilleEngine;
 
 namespace Food.SimpleFood
 {
@@ -13,6 +15,19 @@ namespace Food.SimpleFood
             Price = 10;
             Weight = 0.2;
             Nutrition = 10;
+        }
+
+        public void Use(BaseVillager villager) // Default method for using an food item 
+        {
+            try
+            {
+                Tomato tomato = new Tomato();
+                villager.hunger.IncreaseHunger(tomato.Nutrition);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("You can't eat that"); // If the food can't be eaten
+            }
         }
     }
 }

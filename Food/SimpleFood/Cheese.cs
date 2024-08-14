@@ -1,4 +1,5 @@
 ﻿using Items;
+using PeopleVilleEngine;
 
 namespace Food.SimpleFood
 {
@@ -14,6 +15,19 @@ namespace Food.SimpleFood
             Price = 2;
             Weight = 0.01;
             Nutrition = 2;
+        }
+        
+        public void use(BaseVillager villager)
+        {
+            try
+            {
+                Cheese cheese = new Cheese();
+                villager.hunger.IncreaseHunger(cheese.Nutrition);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Can't eat this food");
+            }
         }
 
     }
