@@ -1,10 +1,9 @@
 ﻿using PeopleVilleEngine.Villagers;
 using System;
 
-
 namespace JobSystem
 {
-    public class JobFactory : IJobFactory
+    public class JobFactory
     {
         public IJob CreateJob(AdultVillager villager)
         {
