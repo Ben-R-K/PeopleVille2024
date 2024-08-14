@@ -2,6 +2,8 @@
 using PeopleVilleEngine;
 using HungerSystem;
 using HungerSystem.Interfaces;
+using Items;
+using Items.Interfaces;
 
 namespace food;
 
@@ -27,15 +29,14 @@ public class Eating: IInteraction
 
     public void Execute(BaseVillager villager)
     {
-        // TODO: Check if we have food in the inventory
-        // IF we have food in the inventory, eat it and continue
-        bool hasFood = true;
+        IItem foodItem = villager.GetItemByType("Food");
+        bool hasFood = foodItem != null;
         if (!hasFood){
             Console.WriteLine($"{villager.ToString()} has no food to eat");
             return;
         }
-        // IFood food;
-        string foodName = "Apple"; // TODO: Change to food.Name when we have food
+
+        string foodName = foodItem.Name;
 
         int time = _rng.Next(2, 25);
         int timePast = 0;
@@ -47,8 +48,8 @@ public class Eating: IInteraction
                 return;
             }
 
-            villager.hunger.IncreaseHunger(10); // TODO: Change this to the food's hunger value
-
+            villager.hunger.IncreaseHunger(foodItem.NutritionValue);
+            villager.RemoveItem(foodItem);
 
             string currentHunger = villager.hunger.CurrentHunger.ToString();
             Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} finished their {foodName}. And their new hunger is {currentHunger}");

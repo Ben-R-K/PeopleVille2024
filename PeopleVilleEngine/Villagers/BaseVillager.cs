@@ -1,5 +1,7 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Locations;
+using Items;
+using Items.Interfaces;
 
 public abstract class BaseVillager
 {
@@ -12,6 +14,7 @@ public abstract class BaseVillager
     public bool HasHome() => Home != null;
     public bool IsBusy;
     public Hunger hunger;
+    private Inventory _inventory;
 
     protected BaseVillager(Village village)
     {
@@ -20,6 +23,22 @@ public abstract class BaseVillager
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
         IsBusy = false;
         hunger = new Hunger(this);
+        _inventory = new Inventory(Age);
+    }
+
+    public IItem GetItemByName(string name)
+    {
+        return _inventory.GetItemByName(name);
+    }
+
+    public IItem GetItemByType(string type)
+    {
+        return _inventory.getItemByType(type);
+    }
+
+    public void RemoveItem(IItem item)
+    {
+        _inventory.RemoveItem(item);
     }
 
     public override string ToString()

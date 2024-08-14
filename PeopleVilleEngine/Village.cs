@@ -10,19 +10,18 @@ public class Village
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
-        private Dictionary<string, Action<BaseVillager>> OnVillagerSpawn;
+    private Dictionary<string, Action<BaseVillager>> OnVillagerSpawn;
 
     public Village()
     {
         Console.WriteLine("Creating villager");
         SetupVillage();
-        
     }
 
 
     private void SetupVillage()
     {
-        var villagers = _random.Next(10, 24);
+        var villagers = _random.Next(25, 100);
         Console.ForegroundColor = ConsoleColor.Red;
 
         var villageCreators = LoadVillagerCreatorFactories();
@@ -51,7 +50,10 @@ public class Village
                 villager = villageCreators[villageCreatorindex].CreateVillager(this);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
             } while (villager == null);
-
+            foreach (Action<BaseVillager> action in OnVillagerSpawn.Values)
+            {
+                action(villager);
+            }
         }
 
         Console.ResetColor();
