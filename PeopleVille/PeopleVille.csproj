@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
     <ProjectReference Include="..\Interactions\Interactions.csproj" />
+    <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
   </ItemGroup>
 
 </Project>
