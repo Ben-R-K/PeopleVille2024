@@ -7,6 +7,7 @@
         string Type { get; }
         double Price { get; set; }
         double Weight { get; set; } // in kg
+        int Nutrition { get; set; }
 
         public void Use();
     }
