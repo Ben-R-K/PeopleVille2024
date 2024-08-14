@@ -9,11 +9,11 @@ namespace Food.SimpleFood
 
         public Cheese()
         {
-            ItemType simpleFood = new ItemType(1, "SimpleFood");
+            ItemType type = new ItemType(1, "Food");
 
             ID = 2;
             Name = "Cheese";
-            Type = simpleFood;
+            Type = type;
             Price = 2;
             Weight = 0.01;
         }

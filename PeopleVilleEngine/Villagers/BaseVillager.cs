@@ -36,6 +36,11 @@ public abstract class BaseVillager
         return _inventory.getItemByType(type);
     }
 
+    public void RemoveItem(IItem item)
+    {
+        _inventory.RemoveItem(item);
+    }
+
     public override string ToString()
     {
         return $"{FirstName} {LastName} ({Age} years)";
