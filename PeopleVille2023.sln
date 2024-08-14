@@ -21,13 +21,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interaction_Libraies", "Int
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseActivities", "Interaction_Libraies\HouseActivities\HouseActivities.csproj", "{12B1924A-93A8-4E7E-A065-36E46DA883C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items", "Items\Items.csproj", "{EC7F89C7-6A4F-4AF2-B36F-1DA20B6CD19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Items", "Items\Items.csproj", "{EC7F89C7-6A4F-4AF2-B36F-1DA20B6CD19E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItemModules", "ItemModules", "{7B2F3192-4695-464D-8611-A5B8212C4238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weapons", "Weapons\Weapons.csproj", "{7A182242-3B66-429A-AA9B-5336A8D29235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weapons", "Weapons\Weapons.csproj", "{7A182242-3B66-429A-AA9B-5336A8D29235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Food", "Food\Food.csproj", "{39609BC8-AC08-4C17-8FF4-F3549F74FD28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Food", "Food\Food.csproj", "{39609BC8-AC08-4C17-8FF4-F3549F74FD28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bag", "Bag\Bag.csproj", "{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,16 +81,19 @@ Global
 		{39609BC8-AC08-4C17-8FF4-F3549F74FD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39609BC8-AC08-4C17-8FF4-F3549F74FD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39609BC8-AC08-4C17-8FF4-F3549F74FD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{12B1924A-93A8-4E7E-A065-36E46DA883C4} = {FF198159-5F20-4F12-BFA2-A17D7CDC9210}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 		{7A182242-3B66-429A-AA9B-5336A8D29235} = {7B2F3192-4695-464D-8611-A5B8212C4238}
 		{39609BC8-AC08-4C17-8FF4-F3549F74FD28} = {7B2F3192-4695-464D-8611-A5B8212C4238}
+		{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7} = {7B2F3192-4695-464D-8611-A5B8212C4238}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {767FA3BF-7AC8-42AE-9089-E5FB641C1FF0}

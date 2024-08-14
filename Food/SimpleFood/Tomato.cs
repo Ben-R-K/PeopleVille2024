@@ -8,11 +8,11 @@ namespace Food.SimpleFood
 
         public Tomato()
         {
-            ItemType simpleFood = new ItemType(1, "SimpleFood");
+            ItemType type = new ItemType(1, "Food");
 
             ID = 1; 
             Name = "Tomato";
-            Type = simpleFood;
+            Type = type;
             Price = 10;
             Weight = 0.2;
         }
