@@ -1,4 +1,6 @@
 ﻿using Items;
+using HungerSystem;
+using PeopleVilleEngine;
 
 namespace Food.SimpleFood
 {
@@ -12,16 +14,15 @@ namespace Food.SimpleFood
             Name = "Tomato";
             Price = 10;
             Weight = 0.2;
+            Nutrition = 10;
         }
 
-        public void Use() // Default method for using an food item 
+        public void Use(BaseVillager villager) // Default method for using an food item 
         {
             try
             {
-                int Nutrition = 10;
-                //Eat(ID); // Call hunger system to eat the food
-
-
+                Tomato tomato = new Tomato();
+                villager.hunger.IncreaseHunger(tomato.Nutrition);
             }
             catch (Exception e)
             {

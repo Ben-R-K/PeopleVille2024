@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HungerSystem\HungerSystem.csproj" />
     <ProjectReference Include="..\Items\Items.csproj" />
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
   </ItemGroup>
