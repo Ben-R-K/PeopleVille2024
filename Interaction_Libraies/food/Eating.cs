@@ -4,6 +4,7 @@ using HungerSystem;
 using HungerSystem.Interfaces;
 using Items;
 using Items.Interfaces;
+using WorldTimer;
 
 namespace food;
 
@@ -48,7 +49,7 @@ public class Eating: IInteraction
                 return;
             }
 
-            villager.hunger.IncreaseHunger(foodItem.NutritionValue);
+            // villager.hunger.IncreaseHunger(foodItem.NutritionValue);
             villager.RemoveItem(foodItem);
 
             string currentHunger = villager.hunger.CurrentHunger.ToString();
