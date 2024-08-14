@@ -51,10 +51,6 @@ public class Village
                 villager = villageCreators[villageCreatorindex].CreateVillager(this);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
             } while (villager == null);
-            foreach (Action<BaseVillager> action in OnVillagerSpawn.Values)
-            {
-                action(villager);
-            }
         }
 
         Console.ResetColor();

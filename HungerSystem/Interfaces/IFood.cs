@@ -11,7 +11,6 @@ namespace HungerSystem.Interfaces
         int NutritionValue { get; } // hvor meget hunger maden reducerer
         string Name { get; } // navn på maden
 
-        int FoodValue { get; } // hvor meget maden koster
 
     }
 }

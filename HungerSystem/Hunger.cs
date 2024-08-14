@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 using HungerSystem.Interfaces;
-using Interactions;
+using WorldTimer;
 
 public class Hunger : IHunger
 {
@@ -25,12 +25,16 @@ public class Hunger : IHunger
         TimerClass WorldTimer = TimerClass.GetInstance();
         WorldTimer.Subscribe((int hours, int minutes, int seconds, string guid) =>
         {
+            if (minutes %4 != 0)
+            {
+                return;
+            }
             OnTimedEvent();
         }, TimerClass.SubscribtionTypes.Minute);
         //hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
         //hungerTimer.Elapsed += OnTimedEvent;
-        hungerTimer.AutoReset = true;
-        hungerTimer.Enabled = true;
+        //hungerTimer.AutoReset = true;
+        //hungerTimer.Enabled = true;
     }
 
     public string Subscribe(Action<dynamic> subscriber)

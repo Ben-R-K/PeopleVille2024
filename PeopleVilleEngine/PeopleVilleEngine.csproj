@@ -30,8 +30,8 @@
   </ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<!-- <Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' /> -->
-		<Exec Command='cp -R "$(ProjectDir)lib" "$(TargetDir)lib"' />
+		<Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' />
+		<!-- <Exec Command='cp -R "$(ProjectDir)lib" "$(TargetDir)lib"' /> -->
 	</Target>
 
 
