@@ -1,5 +1,6 @@
 ﻿using System.Timers;
 using HungerSystem.Interfaces;
+using Interactions;
 
 public class Hunger : IHunger
 {
@@ -21,8 +22,13 @@ public class Hunger : IHunger
         currentHunger = random.Next(50, maxHunger + 1);
 
         // Timer til at reducere hunger over tid
-        hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
-        hungerTimer.Elapsed += OnTimedEvent;
+        TimerClass WorldTimer = TimerClass.GetInstance();
+        WorldTimer.Subscribe((int hours, int minutes, int seconds, string guid) =>
+        {
+            OnTimedEvent();
+        }, TimerClass.SubscribtionTypes.Minute);
+        //hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
+        //hungerTimer.Elapsed += OnTimedEvent;
         hungerTimer.AutoReset = true;
         hungerTimer.Enabled = true;
     }
@@ -34,7 +40,7 @@ public class Hunger : IHunger
         return guid;
     }
 
-    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    private void OnTimedEvent()
     {
         // Reducer hunger med 1% af maxHunger
         int baseDecreaseAmount = (int)(0.01 * maxHunger);
