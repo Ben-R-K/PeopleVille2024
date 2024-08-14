@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocationsEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace LocationsEngine
 {
-    public class ResidentialBuilding : ILocation
+    public class FunktionalBuilding : ILocation
     {
         public string Name { get; set; }
 
-        public List<BaseVillager> CurrentPopulation { get; set; }
+        public LocationTypes LocationType { get; set; }
 
-        public List<BaseVillager> LivingHere { get; set; }
+        public List<BaseVillager> CurrentPopulation { get; set; }
 
         public int MaxPopulation { get; set; }
 
-        public ResidentialBuilding(string name, int maxPopulation)
+        public FunktionalBuilding(string name, LocationTypes locationType, int maxPopulation)
         {
             Name = name;
+            LocationType = locationType;
             CurrentPopulation = new List<BaseVillager>();
-            LivingHere = new List<BaseVillager>();
             MaxPopulation = maxPopulation;
         }
     }

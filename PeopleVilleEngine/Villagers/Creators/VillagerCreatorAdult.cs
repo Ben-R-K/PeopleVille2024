@@ -1,5 +1,5 @@
-﻿using PeopleVilleEngine.Locations;
-namespace PeopleVilleEngine.Villagers.Creators;
+﻿using LocationsEngine.Locations;
+namespace LocationsEngine.Villagers.Creators;
 public class VillagerCreatorAdult : IVillagerCreator
 {
     public bool CreateVillager(Village village)

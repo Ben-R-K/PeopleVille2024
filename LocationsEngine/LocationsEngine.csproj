@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+    <Folder Include="lib\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="lib\" />
+    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
   </ItemGroup>
 
 </Project>

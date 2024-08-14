@@ -1,7 +1,7 @@
-﻿namespace PeopleVilleEngine;
-using PeopleVilleEngine.Villagers.Creators;
-using PeopleVilleEngine.Locations;
+﻿namespace LocationsEngine;
+using LocationsEngine.Villagers.Creators;
 using System.Reflection;
+using LocationsEngine;
 using System.Linq;
 
 public class Village

@@ -1,5 +1,5 @@
-﻿using PeopleVilleEngine;
-using PeopleVilleEngine.Locations;
+﻿using LocationsEngine;
+using LocationsEngine.Locations;
 
 public abstract class BaseVillager
 {

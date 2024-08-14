@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace PeopleVilleEngine;
+namespace LocationsEngine;
 public class VillagerNames
 {
     private string[] _maleFirstNames = new string[] { };

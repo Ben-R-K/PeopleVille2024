@@ -1,4 +1,4 @@
-﻿namespace PeopleVilleEngine.Villagers;
+﻿namespace LocationsEngine.Villagers;
 public class AdultVillager : BaseVillager
 {
     public AdultVillager(Village village) : base(village)
