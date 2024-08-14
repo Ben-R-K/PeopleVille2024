@@ -29,7 +29,9 @@ public class Eating: IInteraction
     {
         // TODO: Check if we have food in the inventory
         // IF we have food in the inventory, eat it and continue
-        bool hasFood = true;
+        bool hasFood = villager.;
+
+
         if (!hasFood){
             Console.WriteLine($"{villager.ToString()} has no food to eat");
             return;
