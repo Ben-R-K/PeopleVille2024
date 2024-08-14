@@ -191,8 +191,7 @@ package "items" #253bc4{
   BaseVillager o-- Inventory
 }
 
-
-package "Interactions" #db1f1f {
+package "WorldTimer" {
   +class TimerClass {
     -millisecondsPerSecond: int
     -_seconds: int
@@ -208,7 +207,9 @@ package "Interactions" #db1f1f {
     +Subscribe(Action<int, int, int, string> subscriber, SubscribtionTypes subscribtionType): string
     +Unsubscribe(string guid, SubscribtionTypes: subscribtionType): void
   }
+}
 
+package "Interactions" #db1f1f {
   +interface IInteraction {
     +IsActivity: bool
     +Execute(BaseVillager: villager): void

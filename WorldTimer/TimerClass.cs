@@ -1,4 +1,4 @@
-﻿namespace Interactions;
+﻿namespace WorldTimer;
 
 public class TimerClass
 {
