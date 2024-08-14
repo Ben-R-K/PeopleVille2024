@@ -13,7 +13,6 @@ namespace Food.SimpleFood
             Name = "Cheese";
             Price = 2;
             Weight = 0.01;
-            Nutrition = 2;
         }
 
     }

@@ -15,7 +15,6 @@ namespace Food
         public string Type { get { return "bag"; } }
         public double Price { get; set; }
         public double Weight { get; set; }
-        public int Nutrition { get; set; }
 
 
 
