@@ -9,17 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleVilleEngine", "People
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleVilleVillagerHomeless", "PeopleVilleVillagerHomeless\PeopleVilleVillagerHomeless.csproj", "{9FDFCE2C-71D0-469C-A774-BC847846BCCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interactions", "Interactions\Interactions.csproj", "{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interactions", "Interactions\Interactions.csproj", "{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutDoorFitness", "Interaction_Libraies\OutDoorFitness\OutDoorFitness.csproj", "{C47AA690-D12C-4657-BAEC-A58594E5CF93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutDoorFitness", "Interaction_Libraies\OutDoorFitness\OutDoorFitness.csproj", "{C47AA690-D12C-4657-BAEC-A58594E5CF93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "food", "Interaction_Libraies\food\food.csproj", "{D565236F-D68A-4FFF-830A-01D417BF70E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "food", "Interaction_Libraies\food\food.csproj", "{D565236F-D68A-4FFF-830A-01D417BF70E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungerSystem", "HungerSystem\HungerSystem.csproj", "{755CE692-67BB-42F3-AC49-35C67117E1FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungerSystem", "HungerSystem\HungerSystem.csproj", "{755CE692-67BB-42F3-AC49-35C67117E1FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interaction_Libraies", "Interaction_Libraies", "{FF198159-5F20-4F12-BFA2-A17D7CDC9210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseActivities", "Interaction_Libraies\HouseActivities\HouseActivities.csproj", "{12B1924A-93A8-4E7E-A065-36E46DA883C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseActivities", "Interaction_Libraies\HouseActivities\HouseActivities.csproj", "{12B1924A-93A8-4E7E-A065-36E46DA883C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Items", "Items\Items.csproj", "{EC7F89C7-6A4F-4AF2-B36F-1DA20B6CD19E}"
 EndProject
@@ -47,6 +47,22 @@ Global
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C47AA690-D12C-4657-BAEC-A58594E5CF93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D565236F-D68A-4FFF-830A-01D417BF70E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755CE692-67BB-42F3-AC49-35C67117E1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755CE692-67BB-42F3-AC49-35C67117E1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755CE692-67BB-42F3-AC49-35C67117E1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755CE692-67BB-42F3-AC49-35C67117E1FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12B1924A-93A8-4E7E-A065-36E46DA883C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12B1924A-93A8-4E7E-A065-36E46DA883C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12B1924A-93A8-4E7E-A065-36E46DA883C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,13 +84,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{12B1924A-93A8-4E7E-A065-36E46DA883C4} = {FF198159-5F20-4F12-BFA2-A17D7CDC9210}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 		{7A182242-3B66-429A-AA9B-5336A8D29235} = {7B2F3192-4695-464D-8611-A5B8212C4238}
 		{39609BC8-AC08-4C17-8FF4-F3549F74FD28} = {7B2F3192-4695-464D-8611-A5B8212C4238}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {767FA3BF-7AC8-42AE-9089-E5FB641C1FF0}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{12B1924A-93A8-4E7E-A065-36E46DA883C4} = {FF198159-5F20-4F12-BFA2-A17D7CDC9210}
 	EndGlobalSection
 EndGlobal

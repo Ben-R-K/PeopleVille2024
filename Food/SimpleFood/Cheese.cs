@@ -2,19 +2,21 @@
 
 namespace Food.SimpleFood
 {
-    internal class Tomato : Food
+    internal class Cheese : Food
     {
+
         public Food TomatoItem { get; private set; }
 
-        public Tomato()
+        public Cheese()
         {
             ItemType simpleFood = new ItemType(1, "SimpleFood");
 
-            ID = 1; 
-            Name = "Tomato";
+            ID = 2;
+            Name = "Cheese";
             Type = simpleFood;
-            Price = 10;
-            Weight = 0.2;
+            Price = 2;
+            Weight = 0.01;
         }
+
     }
 }
