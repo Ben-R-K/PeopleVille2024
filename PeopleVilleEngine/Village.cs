@@ -3,6 +3,7 @@ using System.Reflection;
 using PeopleVilleEngine.Villagers.Creators;
 using LocationsEngine;
 using System.Linq;
+using LocationsEngine.Creators;
 
 public class Village
 {
@@ -20,7 +21,38 @@ public class Village
 
     private void CreateVillage()
     {
-        var villagers = _random.Next(10, 24);
+        ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
+        FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
+
+        residentialBuildingscreator.Savebuldings();
+        funktionalBuildingscreator.SaveBuildings();
+
+        residentialBuildingscreator.CreateBuildings();
+        funktionalBuildingscreator.CreateBuildings();
+
+        int BuildingCount = 5;
+        for (int i = 0; i < BuildingCount; i++)
+        {
+            ResidentialBuilding RB = residentialBuildingscreator.RBs[_random.Next(0, residentialBuildingscreator.RBs.Count)];
+            var locationStatus = RB.Name;
+            Homes.Add(RB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        foreach (FunktionalBuilding FB in funktionalBuildingscreator.FBs)
+        {
+            var locationStatus = FB.Name;
+            Locations.Add(FB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        int livingSpace = 0;
+        foreach(ResidentialBuilding RB in Homes)
+        {
+            livingSpace += RB.MaxPopulation;
+        }
+
+        var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
         Console.ForegroundColor = ConsoleColor.Red;
 
         var villageCreators = LoadVillagerCreatorFactories();
