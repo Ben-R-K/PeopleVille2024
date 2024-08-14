@@ -6,7 +6,7 @@ Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory.ToString());
 Console.WriteLine("PeopleVille");
 
 // A timer to keep track of the time in the village
-TimerClass worldTimer = new TimerClass();
+TimerClass worldTimer = TimerClass.GetInstance();
 
 //Create village
 var village = new Village();

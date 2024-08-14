@@ -29,14 +29,14 @@ public class Eating: IInteraction
 
     public void Execute(BaseVillager villager)
     {
-        IItem food = villager.GetItemByType("Food");
-        bool hasFood = food != null;
+        IItem foodItem = villager.GetItemByType("Food");
+        bool hasFood = foodItem != null;
         if (!hasFood){
             Console.WriteLine($"{villager.ToString()} has no food to eat");
             return;
         }
 
-        string foodName = food.Name;
+        string foodName = foodItem.Name;
 
         int time = _rng.Next(2, 25);
         int timePast = 0;
@@ -48,8 +48,8 @@ public class Eating: IInteraction
                 return;
             }
 
-            villager.hunger.Eat(food);
-            villager.RemoveItem(food);
+            villager.hunger.IncreaseHunger(foodItem.NutritionValue);
+            villager.RemoveItem(foodItem);
 
             string currentHunger = villager.hunger.CurrentHunger.ToString();
             Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} finished their {foodName}. And their new hunger is {currentHunger}");
