@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Items\Items.csproj" />
+    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
   </ItemGroup>
 
 </Project>

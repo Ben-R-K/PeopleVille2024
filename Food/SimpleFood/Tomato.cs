@@ -14,7 +14,7 @@ namespace Food.SimpleFood
             Weight = 0.2;
         }
 
-        public void Use() // Default method for using an food item
+        public void Use() // Default method for using an food item 
         {
             try
             {
