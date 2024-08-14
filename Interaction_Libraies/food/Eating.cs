@@ -49,7 +49,7 @@ public class Eating: IInteraction
             }
 
             villager.hunger.Eat(food);
-            villager.removeItem(food);
+            villager.RemoveItem(food);
 
             string currentHunger = villager.hunger.CurrentHunger.ToString();
             Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} finished their {foodName}. And their new hunger is {currentHunger}");
