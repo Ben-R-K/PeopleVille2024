@@ -16,6 +16,7 @@ public class Village
     {
         Console.WriteLine("Creating villager");
         SetupVillage();
+        
     }
 
 

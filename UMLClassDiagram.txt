@@ -1,117 +1,396 @@
 @startuml
-+class "Village" {
-  - _random: RNG
-  + Villagers: List<BaseVillager>
-  + Locations: List<ILocation>
-  + VillagerNameLibrary: VillagerNames
+package "PeopleVilleEngine" #4f3f3f {
+  +class "Village" {
+    - _random: RNG
+    + Villagers: List<BaseVillager>
+    + Locations: List<ILocation>
+    + VillagerNameLibrary: VillagerNames
 
-  -LoadVillagerCreatorFactories(): List<IVillagerCreator>
-  -CreateVillage(): Void
-  -LoadVillagerCreatorFactoryFromType(IEnumarable<Type> inputTypes, List<IVillagerCreator> outputVillagerCreators): Void
-  +ToString(): String
+    -LoadVillagerCreatorFactories(): List<IVillagerCreator>
+    -CreateVillage(): Void
+    -LoadVillagerCreatorFactoryFromType(IEnumarable<Type> inputTypes, List<IVillagerCreator> outputVillagerCreators): Void
+    +ToString(): String
+  }
+
+
+
+  +abstract class "BaseVillager" {
+    +Age: int
+    +FirstName: String
+    +LastName: String
+    +IsMale: Boolean
+    -_village: Village
+    -_inventory: Inventory
+    +Home: ILocation?
+    +hunger: Hunger
+
+    +ToString(): String
+    +GetItemByName(string name): IItem
+    +GetItemByType(string type): IItem
+  }
+
+  +class AdultVillager {
+  }
+
+  +class ChildVillager {
+
+  }
+
+
+  +class RNG {
+    -_rng: RNG?
+    -_random: Random
+    -padlock: Object
+
+  +Next(int max): int
+  +Next(int max, int min): int
+  +GetInstance(): RNG
+  }
+
+
+  +class VillagerNames {
+    -_maleFirstNames: String[]
+    -_feMaleFirstNames: String[]
+    -_lastNames: String[]
+    _random: RNG
+    -_instance: VillagerNames
+
+    +GetInstance(): VillagerNames
+    -LoadNamesFromJsonFile(): Void
+    -GetRandomName(string[] names): String
+    +GetRandomFirstName(Boolean isMale): String
+    +GetRandomLastName(): String
+    +GetRandomNames(Boolean isMale): (String, String)
+  }
+
+  -class NamesData {
+    +MaleFirstNames: String[]
+    +FemaleFirstNames: String[]
+    +LastNames: String[]
+  }
+
+
+  +interface ILocation {
+    Name: string
+    CurrentPopulation: List<BaseVillager>
+    MaxPopulation: int
+  }
+
+  +interface IHouse {
+    +Population: int
+    +MaxPopulation: int
+  }
+
+  +interface IVillagerCreator {
+    +CreateVillager(Village: village): Boolean
+  }
+
+  +interface VillagerCreatorAdult {
+    +CreateVillager(Village: village): Boolean
+    -FindHome(Village village): IHouse
+  }
+
+  +interface VillagerCreatorChild {
+    +CreateVillager(Village: village): Boolean
+    -FindHome(Village village): IHouse?
+  }
+
+
+  +class HomeLessVillageCreator {
+    +CreateVillager(Village: village): Boolean
+  }
+
+  +class SimpleHouse {
+    -_Villagers: List<BaseVillager>
+    +Name: String
+    +Population: int
+    +MaxPopulation: int  
+  }
+
+
+
+  Village *-- BaseVillager
+  BaseVillager o-- ILocation
+
+  BaseVillager <|-- AdultVillager
+  BaseVillager <|-- ChildVillager
+
+
+  ILocation <|-- IHouse
+  IHouse <|-- SimpleHouse
+
+  Village o-- RNG
+  VillagerNames o-- RNG
+  Village o-- VillagerNames
+  BaseVillager o-- IItem
 }
 
 
+package "items" #253bc4{
+  +class Inventory {
+    -_items: List<IItem>
+    -_maxWeight: int
+    -_currentWeight: Double
+    -_slots: int
+    -CalculateAgeFactor(int Age): int
+    +AddItem(IItem item): void
+    +RemoveItem(IItem item): void
+    +GetItemByName(string name):IItem
+    +GetItemByType(string type): IItem
+    +GetAllItems(): List<IItem>
+    +Clear(): void
+  }
 
-+abstract class "BaseVillager" {
-  +Age: int
-  +FirstName: String
-  +LastName: String
-  +IsMale: Boolean
-  -_village: Village
-  +Home: ILocation?
+  +class InstantiateItems {
+    -_pluginsFolder: string
+    +LoadItems(): List<Item>
+  }
 
-  +ToString(): String
-}
+  +interface IItem{
+    ID: int
+    Name: string
+    type: ItemType
+    price: Double
+    weight: Double
 
-+class AdultVillager {
-}
+    +Use(): void
+  }
 
-+class ChildVillager {
+  +class Item {
+    +ID: int
+    +Name: string
+    +type: ItemType
+    +price: Double
+    +weight: Double
 
-}
+    +Use(): void
+  }
 
+  ~class Main {
+    -_instantiateItems: InstantiateItems
+    -_loadedItems: List<IItem>
+    +GiveStartItem(): Item
+    +LoadAllItems(): List<Item>
+    +UnloadItems(): void
+    +ReloadItems(): void
+    +GetItemByName(string name): IItem
+  }
 
-+class RNG {
-  -_rng: RNG?
-  -_random: Random
-  -padlock: Object
+  +interface IItemType{
+    ID: int
+    Name: string
+  }
 
- +Next(int max): int
- +Next(int max, int min): int
- +GetInstance(): RNG
-}
+  +class ItemType {
+    +ID: int
+    +Name: string
+  }
 
-
-+class VillagerNames {
-  -_maleFirstNames: String[]
-  -_feMaleFirstNames: String[]
-  -_lastNames: String[]
-  _random: RNG
-  -_instance: VillagerNames
-
-  +GetInstance(): VillagerNames
-  -LoadNamesFromJsonFile(): Void
-  -GetRandomName(string[] names): String
-  +GetRandomFirstName(Boolean isMale): String
-  +GetRandomLastName(): String
-  +GetRandomNames(Boolean isMale): (String, String)
-}
-
--class NamesData {
-  +MaleFirstNames: String[]
-  +FemaleFirstNames: String[]
-  +LastNames: String[]
- }
-
-
-+interface ILocation {
-  +Name: String
-}
-
-+interface IHouse {
-  +Population: int
-  +MaxPopulation: int
-}
-
-+interface IVillagerCreator {
-  +CreateVillager(Village: village): Boolean
-}
-
-+interface VillagerCreatorAdult {
-  +CreateVillager(Village: village): Boolean
-  -FindHome(Village village): IHouse
-}
-
-+interface VillagerCreatorChild {
-  +CreateVillager(Village: village): Boolean
-  -FindHome(Village village): IHouse?
+  IItem <|-- Item
+  IItemType <|-- ItemType
+  BaseVillager o-- Inventory
 }
 
 
-+class HomeLessVillageCreator {
-  +CreateVillager(Village: village): Boolean
+package "Interactions" #db1f1f {
+  +class TimerClass {
+    -millisecondsPerSecond: int
+    -_seconds: int
+    -_minutes: int
+    -_hours: int
+    -_days: int
+    -OnMinuteChange: Dictionary<string, Action<int, int, int, string>>
+    -OnHourChange: Dictionary<string, Action<int, int, int, string>>
+    -OnDayChange: Dictionary<string, Action<int, int, int, string>>
+    +SubscribtionTypes: enum
+    +ToString: string
+    +UpdateTime: void
+    +Subscribe(Action<int, int, int, string> subscriber, SubscribtionTypes subscribtionType): string
+    +Unsubscribe(string guid, SubscribtionTypes: subscribtionType): void
+  }
+
+  +interface IInteraction {
+    +IsActivity: bool
+    +Execute(BaseVillager: villager): void
+  }
+
+  +class InteractionCreator {
+    -interactions: List<IInteraction>
+    +Interactions({get;}): List<IInteraction>
+    -_rng: RNG
+    -_worldTimer: TimerClass
+    -_village: Village
+    -RunInteractions(BaseVillager villager, IInteraction interaction): void
+    -RunInteractions(): void
+    +LoadInteractions(): void
+    -LoadInteractionFromType(IEnumerable<Type> inputTypes, List<IInteraction> outputInteractions): void
+  }
+
+
+
+
+  IInteraction o-- BaseVillager
+
+  InteractionCreator o-- RNG
+  InteractionCreator o-- TimerClass
+  InteractionCreator o-- Village
 }
 
-+class SimpleHouse {
-  -_Villagers: List<BaseVillager>
-  +Name: String
-  +Population: int
-  +MaxPopulation: int  
+
+package "BankSystem" #0722ab {
+    +class Account {
+        -_accountNumber: string
+        -_accountHolder: string
+        -_balance: double
+        -_interestRate: double
+        +Deposit(double amount): void
+        +Withdraw(double amount): void
+        +GetBalance(): double
+        +GetAccountHolder: string
+        +GetAccountNumber: string
+        +Transfer(Account destinationAccount, double amount): void
+        +ApplyInterest(): void
+    }
+
+    +class BankSystem {
+        -_name: string
+        -_accounts: List<Account>
+        +AddAccount(string name): void
+        +RemoveAccount(string accountNumber): void
+        +GetAccount(string accountNumber): Account
+        +Transfer(string sourceAccountNumber, string destinationAccountNumber, double amount): void
+        +GetBalance(string accountNumber): double
+        +GetAccountHolder(string accountNumber): string
+        +Deposit(string accountNumber, double amount): void
+        +Withdraw(string accountNumber, double amount): void
+        +ApplyInterestToAllAccounts(int hours, int minutes, int seconds): void
+        +PrintAllAccounts(): void
+        +ToString(): string
+    }
+
+    BankSystem o-- Account
 }
 
 
-Village *-- BaseVillager
-BaseVillager o-- ILocation
+package "HungerSystem" {
 
-BaseVillager <|-- AdultVillager
-BaseVillager <|-- ChildVillager
+    +interface IFood {
+        +NutritionValue: int
+        +Name: string
+        +FoodValue: int
+    }
+
+    +interface IHunger {
+        +CurrentHunger: int
+        +MaxHunger: int
+        +IsWorking: bool
+        +Eat(IFood food): void
+        +DecreaseHunger(int amount): int
+        +IncreaseHunger(int amount): void
+        +Subscribe(Action<dynamic> subscriber): string
+        +OnStarvation: EventHandler
+    }
+
+    +class Hunger {
+        -maxHunger: int = 100
+        -currentHunger: int
+        -threshold: int = 50
+        -hungerTimer: System.Timers.Timer
+        -random: static Random
+        -_villager: dynamic
+        -OnHungerThresholdReached: (string, Action<dynamic>)
+
+        +Hunger(dynamic villager)
+        +Subscribe(Action<dynamic> subscriber): string
+        +Eat(IFood food): void
+        +DecreaseHunger(int amount): int
+        +IncreaseHunger(int amount): void
+        -OnTimedEvent(Object source, ElapsedEventArgs e): void
+        +OnStarvation: EventHandler
+        +IsWorking: bool
+        +CurrentHunger: int
+        +MaxHunger: int
+    }
+
+    Hunger --|> IHunger
+    BaseVillager o-- Hunger
+}
 
 
-ILocation <|-- IHouse
-IHouse <|-- SimpleHouse
+package "Jobs" {
+  +class JobDetails {
+    +building: string
+    +salery: Double
+    +isMale: bool
+    +timeSpent: int
+    +isWorking: bool
 
-Village o-- RNG
-VillagerNames o-- RNG
-Village o-- VillagerNames
+    +JobDetails(AdultVillager villager)
+
+    -GenerateSalery(isMale: bool): double
+  }
+
+  interface IJob {
+    building: string
+    salery: double
+    isMale: bool
+    timeSpent: int
+  }
+
+  +class JobFactory {
+    +JobFactory(AdultVillager villager)
+  }
+
+  +class JobSchedule {
+    -_village: Village
+    -_time: TimerClass
+    -_jobFactory: JobFactory
+    -_villagerJobs: Dictionary<AdultVillager, IJob>
+    +JobSchedule(Village village, TimerClass timer)
+
+    -Subscribe(): void
+    -onHourChange(int hours, int minutes, int seconds, string guid): void
+    -AssignWork(): void
+    -StopWork(): void
+  }
+
+  IJob <|-- JobDetails
+  JobSchedule o-- TimerClass
+  JobSchedule o-- Village
+  JobSchedule o-- AdultVillager
+}
+
+
+package "LoactionsEngine" #46eb34 {
+
+
+  +class ResidentialBuidling {
+    +name: string
+    +currentPopulation: List<BaseVillager>
+    +LivingHere: List<BaseVillager>
+    +maxPopulation: int
+  }
+
+  +class FunctionalBuilding {
+    +name: string
+    +currentPopulation: List<BaseVillager>
+    +maxPopulation: int
+    +BuildingTypes: enum
+  }
+
+  +class ResidentialBuidlingsCreator {
+    +CreateBuildings(): void
+  }
+
+  +class FunctionalBuildingsCreator {
+    +CreateBuildings(): void
+  }
+
+  ResidentialBuidling --|> ILocation
+  FunctionalBuilding --|> ILocation
+  ResidentialBuidling o-- BaseVillager
+  FunctionalBuilding o-- BaseVillager
+}
+
+
 @enduml
