@@ -48,7 +48,7 @@ public class Eating: IInteraction
                 return;
             }
 
-            villager.hunger.IncreaseHunger(foodItem.NutritionValue);
+            // villager.hunger.IncreaseHunger(foodItem.NutritionValue);
             villager.RemoveItem(foodItem);
 
             string currentHunger = villager.hunger.CurrentHunger.ToString();

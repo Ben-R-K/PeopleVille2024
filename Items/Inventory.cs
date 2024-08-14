@@ -65,7 +65,7 @@ namespace Items
 
         public IItem getItemByType(string type)
         {
-            return _items.Find(item => item.Type.Name.Equals(type, StringComparison.OrdinalIgnoreCase));
+            return _items.Find(item => item.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
         }
 
         public List<IItem> GetAllItems()
