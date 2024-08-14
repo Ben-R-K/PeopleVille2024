@@ -3,12 +3,10 @@ using Interactions;
 
 public class BankSystem
 {
-    private string _name { get; set; }
     private List<Account> _accounts { get; set; }
 
-    public BankSystem(string name, TimerClass timerClass)
+    public BankSystem(TimerClass timerClass)
     {
-        _name = name;
         _accounts = new List<Account>();
 
         timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
@@ -83,10 +81,5 @@ public class BankSystem
             Console.WriteLine($"Balance: {account.GetBalance()}");
             Console.WriteLine();
         }
-    }
-
-    public override string ToString()
-    {
-        return _name;
     }
 }
