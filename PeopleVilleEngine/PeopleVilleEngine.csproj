@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -25,8 +25,9 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command='cp -R "$(ProjectDir)lib" "$(TargetDir)lib"' />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' />
+	</Target>
+
 
 </Project>

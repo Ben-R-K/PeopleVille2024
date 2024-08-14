@@ -1,22 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-      <None Update="interaction_dlls\*">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="interaction_dlls\**\*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+	</ItemGroup>
 
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-      <Exec Command='cp -R "$(ProjectDir)interaction_dlls" "$(TargetDir)interaction_dlls"' />
-    </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command='robocopy "$(ProjectDir)lib" "$(TargetDir)lib" /E' />
+	</Target>
+
 </Project>
