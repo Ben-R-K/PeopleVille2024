@@ -9,6 +9,7 @@ namespace JobSystem
         public double Salary { get; set; }
         public bool IsMale { get; set; }
         public int TimeSpent { get; set; }
+        public bool IsWorking { get; set; }
 
         private static Random random = new Random();
 
@@ -18,6 +19,7 @@ namespace JobSystem
             IsMale = villager.IsMale;
             Salary = GenerateSalary(IsMale);
             TimeSpent = 0; 
+            IsWorking = true; 
         }
 
         private double GenerateSalary(bool isMale)
@@ -33,4 +35,3 @@ namespace JobSystem
         }
     }
 }
-

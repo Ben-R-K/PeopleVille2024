@@ -49,7 +49,12 @@ public class JobScheduler
             }
             else
             {
-                _villagerJobs[villager].TimeSpent++;
+                var job = _villagerJobs[villager] as JobDetails;
+                if (job != null && !job.IsWorking)
+                {
+                    job.IsWorking = true;
+                    job.TimeSpent++;
+                }
             }
         }
     }
@@ -60,9 +65,12 @@ public class JobScheduler
         {
             if (_villagerJobs.ContainsKey(villager))
             {
-                var job = _villagerJobs[villager];
-                Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Salary: {job.Salary}");
-                _villagerJobs.Remove(villager);
+                var job = _villagerJobs[villager] as JobDetails;
+                if (job != null && job.IsWorking)
+                {
+                    job.IsWorking = false;
+                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Total Time Spent: {job.TimeSpent} hours, Salary: {job.Salary}");
+                }
             }
         }
     }
