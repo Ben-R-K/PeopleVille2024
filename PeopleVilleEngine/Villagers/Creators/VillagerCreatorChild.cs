@@ -21,6 +21,7 @@ public class VillagerCreatorChild : IVillagerCreator
         var potentialParents = village.Villagers.Where(V => V.GetType() == typeof(AdultVillager)).Where(V => V.Home == child.Home).ToList();
 
         child.Parent = (AdultVillager)potentialParents[random.Next(0, potentialParents.Count)];
+        child.FirstName = firstName;
         child.LastName = child.Parent.LastName;
 
         village.Villagers.Add(child);
