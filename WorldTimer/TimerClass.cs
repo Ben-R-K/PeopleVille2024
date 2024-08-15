@@ -3,7 +3,7 @@
 public class TimerClass
 {
     private static TimerClass? _timerClass;
-    private int millisecondsPerSecond = 2;
+    private int millisecondsPerSecond = 1;
     private int _seconds;
     private int _minutes;
     private int _hours;
