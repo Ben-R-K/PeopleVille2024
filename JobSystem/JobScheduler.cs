@@ -18,7 +18,7 @@ public class JobScheduler
     {
         _village = village;
         _timer = timer;
-        _jobFactory = new JobFactory();
+        _jobFactory = new JobFactory(_bankSystem);
         _villagerJobs = new Dictionary<AdultVillager, IJob>();
         _bankSystem = bankSystem;
         SubscribeToTimer();

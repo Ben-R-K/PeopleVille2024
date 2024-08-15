@@ -1,21 +1,20 @@
 ﻿using PeopleVilleEngine.Villagers;
-using System;
+using PeopleVilleBankSystem;
 
 namespace JobSystem
 {
     public class JobFactory
     {
+        private readonly BankSystem _bankSystem;
+
+        public JobFactory(BankSystem bankSystem)
+        {
+            _bankSystem = bankSystem;
+        }
+
         public IJob CreateJob(AdultVillager villager)
         {
-            if (villager.HasHome())
-            {
-                return new JobDetails(villager);
-            }
-            else
-            {
-                throw new InvalidOperationException("Villager must not be homeless to have a job");
-            }
+            return new JobDetails(villager, _bankSystem);
         }
     }
 }
-
