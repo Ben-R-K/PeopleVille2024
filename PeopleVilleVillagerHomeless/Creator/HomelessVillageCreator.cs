@@ -20,6 +20,7 @@ public class HomelessVillageCreator : IVillagerCreator
             return null; //1 of 8 chance to create a homeless
         
         var adult = new AdultVillager(village, random.Next(20, 65));
+
         //Add to village
         village.Villagers.Add(adult);
         return adult;
