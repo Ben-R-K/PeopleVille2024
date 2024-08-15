@@ -6,7 +6,7 @@ public class VillagerNames
     private string[] _maleFirstNames = new string[] { };
     private string[] _femaleFirstNames = new string[] { };
     private string[] _lastNames = new string[] { };
-    RNG _random;
+    RNG _random; 
     private static VillagerNames? _instance = null;
 
     private VillagerNames()
