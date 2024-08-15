@@ -1,8 +1,10 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Villagers;
-using Interactions;
 using JobSystem;
-
+using System.Linq;
+using System.Collections.Generic;
+using Interactions;
+using PeopleVilleBankSystem;
 
 public class JobScheduler
 {
@@ -10,13 +12,15 @@ public class JobScheduler
     private readonly TimerClass _timer;
     private readonly JobFactory _jobFactory;
     private readonly Dictionary<AdultVillager, IJob> _villagerJobs;
+    private readonly BankSystem _bankSystem;
 
-    public JobScheduler(Village village, TimerClass timer)
+    public JobScheduler(Village village, TimerClass timer, BankSystem bankSystem)
     {
         _village = village;
         _timer = timer;
         _jobFactory = new JobFactory();
         _villagerJobs = new Dictionary<AdultVillager, IJob>();
+        _bankSystem = bankSystem;
         SubscribeToTimer();
     }
 
@@ -43,7 +47,7 @@ public class JobScheduler
         {
             if (!_villagerJobs.ContainsKey(villager))
             {
-                var job = _jobFactory.CreateJob(villager);
+                var job = _jobFactory.CreateJob(villager, _bankSystem);
                 _villagerJobs[villager] = job;
                 Console.WriteLine($"Assigned job to villager: {villager.FirstName} {villager.LastName}");
             }
@@ -69,10 +73,10 @@ public class JobScheduler
                 if (job != null && job.IsWorking)
                 {
                     job.IsWorking = false;
-                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName} Salary: {job.Salary}");
+                    job.PaySalary();
+                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Total Time Spent: {job.TimeSpent} hours, Salary: {job.Salary}");
                 }
             }
         }
     }
 }
- 

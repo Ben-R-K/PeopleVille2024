@@ -1,4 +1,5 @@
 ﻿using PeopleVilleEngine.Villagers;
+using PeopleVilleBankSystem;
 using System;
 
 namespace JobSystem
@@ -10,28 +11,39 @@ namespace JobSystem
         public bool IsMale { get; set; }
         public int TimeSpent { get; set; }
         public bool IsWorking { get; set; }
+        public string AccountNumber { get; set; }
 
         private static Random random = new Random();
+        private readonly BankSystem _bankSystem;
 
-        public JobDetails(AdultVillager villager)
+        public JobDetails(AdultVillager villager, BankSystem bankSystem)
         {
             Building = "Job";
             IsMale = villager.IsMale;
             Salary = GenerateSalary(IsMale);
-            TimeSpent = 0; 
-            IsWorking = true; 
+            TimeSpent = 0; // Initialize with 0 hours
+            IsWorking = true; // Initialize as working when job is created
+            _bankSystem = bankSystem;
+
+            // Create a bank account for the villager if they don't already have one
+            AccountNumber = _bankSystem.AddAccount(villager.FirstName + " " + villager.LastName);
         }
 
         private double GenerateSalary(bool isMale)
         {
             if (isMale)
             {
-                return random.Next(250, 501); // Salary for males
+                return random.Next(500, 1001); // Salary for males
             }
             else
             {
-                return random.Next(150, 400); // Salary for females
+                return random.Next(300, 801); // Salary for females
             }
+        }
+
+        public void PaySalary()
+        {
+            _bankSystem.Deposit(AccountNumber, Salary);
         }
     }
 }
