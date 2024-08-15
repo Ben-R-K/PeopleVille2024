@@ -1,14 +1,16 @@
 ﻿namespace PeopleVilleEngine;
-using PeopleVilleEngine.Villagers.Creators;
-using PeopleVilleEngine.Locations;
 using System.Reflection;
+using PeopleVilleEngine.Villagers.Creators;
+using LocationsEngine;
 using System.Linq;
+using LocationsEngine.Creators;
 
 public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
     public List<BaseVillager> Villagers { get; } = new();
-    public List<ILocation> Locations { get; } = new();
+    public List<FunktionalBuilding> Locations { get; } = new();
+    public List<ResidentialBuilding> Homes { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
     private Dictionary<string, Action<BaseVillager>> OnVillagerSpawn;
 
@@ -16,13 +18,39 @@ public class Village
     {
         OnVillagerSpawn = new Dictionary<string, Action<BaseVillager>>();
         Console.WriteLine("Creating villager");
-        SetupVillage();
     }
 
-
-    private void SetupVillage()
+    private void CreateVillage()
     {
-        var villagers = _random.Next(25, 100);
+        ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
+        FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
+
+        residentialBuildingscreator.CreateBuildings();
+        funktionalBuildingscreator.CreateBuildings();
+
+        int BuildingCount = 5;
+        for (int i = 0; i < BuildingCount; i++)
+        {
+            ResidentialBuilding RB = residentialBuildingscreator.RBs[_random.Next(0, residentialBuildingscreator.RBs.Count)];
+            var locationStatus = RB.Name;
+            Homes.Add(RB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        foreach (FunktionalBuilding FB in funktionalBuildingscreator.FBs)
+        {
+            var locationStatus = FB.Name;
+            Locations.Add(FB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        int livingSpace = 0;
+        foreach(ResidentialBuilding RB in Homes)
+        {
+            livingSpace += RB.MaxPopulation;
+        }
+
+        var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
         Console.ForegroundColor = ConsoleColor.Red;
 
         var villageCreators = LoadVillagerCreatorFactories();
@@ -90,6 +118,6 @@ public class Village
 
     public override string ToString()
     {
-        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
+        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.Home == null)} are homeless.";
     }
 }

@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocationsEngine\LocationsEngine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HungerSystem\HungerSystem.csproj" />
   </ItemGroup>
 
@@ -25,7 +29,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="lib\PeopleVilleVillagerHomeless.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

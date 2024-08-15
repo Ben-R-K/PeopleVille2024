@@ -1,4 +1,6 @@
-﻿using PeopleVilleEngine;
+﻿using LocationsEngine;
+using LocationsEngine.Creators;
+using PeopleVilleEngine;
 using Interactions;
 using WorldTimer;
 using PeopleVilleBankSystem;
@@ -24,7 +26,7 @@ interactionCreator.LoadInteractions();
 foreach (var location in village.Locations)
 {
     var locationStatus = location.Name;
-    foreach (var villager in location.Villagers().OrderByDescending(v => v.Age))
+    foreach(var villager in village.Villagers.Where(V => V.CurrentLocation == location).OrderByDescending(v => v.Age))
     {
         locationStatus += $" {villager}";
     }
