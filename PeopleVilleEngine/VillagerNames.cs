@@ -6,7 +6,7 @@ public class VillagerNames
     private string[] _maleFirstNames = new string[] { };
     private string[] _femaleFirstNames = new string[] { };
     private string[] _lastNames = new string[] { };
-    RNG _random; 
+    RNG _random;
     private static VillagerNames? _instance = null;
 
     private VillagerNames()
@@ -24,10 +24,11 @@ public class VillagerNames
 
     private void LoadNamesFromJsonFile()
     {
-        string jsonFile = "lib\\names.json";
+        string jsonFile = "lib/names.json";
+        Console.WriteLine(Directory.GetFiles("lib"));
         if (!File.Exists(jsonFile))
             throw new FileNotFoundException(jsonFile);
-        
+
         string jsonData = File.ReadAllText(jsonFile);
         var namesData = JsonSerializer.Deserialize<NamesData>(jsonData);
         _maleFirstNames = namesData.MaleFirstNames;
