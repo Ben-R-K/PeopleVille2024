@@ -1,7 +1,8 @@
-﻿namespace Interactions;
+﻿namespace WorldTimer;
 
 public class TimerClass
 {
+    private static TimerClass? _timerClass;
     private int millisecondsPerSecond = 2;
     private int _seconds;
     private int _minutes;
@@ -20,14 +21,17 @@ public class TimerClass
 
     public override string ToString()
     {
-        // string hours = (_seconds/3600%24).ToString().PadLeft(2, '0');
-        // string minutes = (_seconds/60%60).ToString().PadLeft(2, '0');
-
         string hours = _hours.ToString().PadLeft(2, '0');
         string minutes = _minutes.ToString().PadLeft(2, '0');
         string seconds = (_seconds%60).ToString().PadLeft(2, '0');
-        // return $"{hours}:{minutes}:{seconds}";
         return $"{hours}:{minutes}:{seconds}";
+    }
+
+    public static TimerClass GetInstance(){
+        if (_timerClass == null){
+            _timerClass = new TimerClass();
+        }
+        return _timerClass;
     }
 
     public TimerClass()

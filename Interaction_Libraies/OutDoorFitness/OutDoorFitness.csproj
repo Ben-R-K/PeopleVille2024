@@ -9,5 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Interactions\Interactions.csproj" />
     <ProjectReference Include="..\..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+    <ProjectReference Include="..\..\WorldTimer\WorldTimer.csproj" />
   </ItemGroup>
 </Project>

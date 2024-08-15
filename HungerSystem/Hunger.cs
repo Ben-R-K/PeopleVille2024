@@ -1,5 +1,7 @@
 ﻿using System.Timers;
 using HungerSystem.Interfaces;
+using WorldTimer;
+
 
 public class Hunger : IHunger
 {
@@ -21,11 +23,22 @@ public class Hunger : IHunger
         currentHunger = random.Next(50, maxHunger + 1);
 
         // Timer til at reducere hunger over tid
-        hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
-        hungerTimer.Elapsed += OnTimedEvent;
-        hungerTimer.AutoReset = true;
-        hungerTimer.Enabled = true;
+        TimerClass WorldTimer = TimerClass.GetInstance();
+        WorldTimer.Subscribe((int hours, int minutes, int seconds, string guid) =>
+        {
+            if (minutes % 4 != 0)
+            {
+                return;
+            }
+            OnTimedEvent();
+        }, TimerClass.SubscribtionTypes.Minute);
+        //hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
+        //hungerTimer.Elapsed += OnTimedEvent;
+        //hungerTimer.AutoReset = true;
+        //hungerTimer.Enabled = true;
     }
+
+
 
     public string Subscribe(Action<dynamic> subscriber)
     {
@@ -34,14 +47,14 @@ public class Hunger : IHunger
         return guid;
     }
 
-    private void OnTimedEvent(Object source, ElapsedEventArgs e)
+    private void OnTimedEvent()
     {
         // Reducer hunger med 1% af maxHunger
         int baseDecreaseAmount = (int)(0.01 * maxHunger);
 
         int newHunger;
 
-        if (IsWorking)
+        if (_villager.IsWorking)
         {
             // Hvis villager arbejder, falder hunger med en ekstra faktor, f.eks. 1.5 gange så hurtigt
             newHunger = DecreaseHunger((int)(baseDecreaseAmount * 1.5));
@@ -57,7 +70,7 @@ public class Hunger : IHunger
         }
     }
 
-    public bool IsWorking { get; set; }
+
 
     public int DecreaseHunger(int amount)
     {

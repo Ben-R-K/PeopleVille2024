@@ -1,5 +1,6 @@
 using System.Reflection;
 using PeopleVilleEngine;
+using WorldTimer;
 
 namespace Interactions;
 
@@ -33,6 +34,10 @@ public class InteractionCreator
 
     private void RunInteractions(){
         _worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
+            if (minute != 30 && minute != 0){
+                return;
+            }
+            
             if (interactions.Count > 0){
                 BaseVillager randomVillager = _village.Villagers[_rng.Next(0, _village.Villagers.Count + 1)];
                 IInteraction interaction = interactions[_rng.Next(0, interactions.Count + 1)];
@@ -51,7 +56,7 @@ public class InteractionCreator
                 randomVillager.IsBusy = true;
                 RunInteractions(randomVillager, interaction);
             }
-        }, TimerClass.SubscribtionTypes.Hour);
+        }, TimerClass.SubscribtionTypes.Minute);
     }
 
     public void LoadInteractions()

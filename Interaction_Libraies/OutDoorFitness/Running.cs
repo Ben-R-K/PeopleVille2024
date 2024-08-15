@@ -1,5 +1,6 @@
 ﻿using Interactions;
 using PeopleVilleEngine;
+using WorldTimer;
 
 namespace OutDoorFitness {
     public class Running: IInteraction
@@ -18,6 +19,10 @@ namespace OutDoorFitness {
 
         public void Execute(BaseVillager villager)
         {
+            if (villager.IsBusy || villager.Age < 12){
+                return;
+            }
+
             Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is taking a run");
             _worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} finished their run");
