@@ -1,8 +1,10 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Villagers;
 using JobSystem;
-using Interactions;
+using System.Linq;
+using System.Collections.Generic;
 using PeopleVilleBankSystem;
+using Interactions;
 
 public class JobScheduler
 {
@@ -24,7 +26,12 @@ public class JobScheduler
 
     private void SubscribeToTimer()
     {
-        _timer.Subscribe(OnHourChange, TimerClass.SubscribtionTypes.Hour);
+        _timer.Subscribe(OnHourChangeWrapper, TimerClass.SubscribtionTypes.Hour);
+    }
+
+    private void OnHourChangeWrapper(int hours, int minutes, int seconds)
+    {
+        OnHourChange(hours, minutes, seconds, string.Empty);
     }
 
     private void OnHourChange(int hours, int minutes, int seconds, string guid)
@@ -45,7 +52,7 @@ public class JobScheduler
         {
             if (!_villagerJobs.ContainsKey(villager))
             {
-                var job = _jobFactory.CreateJob(villager, _bankSystem);
+                var job = _jobFactory.CreateJob(villager);
                 _villagerJobs[villager] = job;
                 Console.WriteLine($"Assigned job to villager: {villager.FirstName} {villager.LastName}");
             }

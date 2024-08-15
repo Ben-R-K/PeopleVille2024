@@ -26,7 +26,7 @@ namespace JobSystem
             _bankSystem = bankSystem;
 
             // Create a bank account for the villager if they don't already have one
-            AccountNumber = _bankSystem.AddAccount(villager.FirstName + " " + villager.LastName);
+            AccountNumber = AddAccountAndGetNumber(villager.FirstName + " " + villager.LastName);
         }
 
         private double GenerateSalary(bool isMale)
@@ -44,6 +44,13 @@ namespace JobSystem
         public void PaySalary()
         {
             _bankSystem.Deposit(AccountNumber, Salary);
+        }
+
+        private string AddAccountAndGetNumber(string accountHolder)
+        {
+            // Simulate the AddAccount method returning a string
+            _bankSystem.AddAccount(accountHolder);
+            return Guid.NewGuid().ToString(); // Generate a new GUID as the account number
         }
     }
 }
