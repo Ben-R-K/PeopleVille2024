@@ -39,7 +39,7 @@ public class Eating: IInteraction
 
         string foodName = foodItem.Name;
 
-        int time = _rng.Next(2, 25);
+        int time = _rng.Next(2, 17);
         int timePast = 0;
 
         Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is eating a(n) {foodName}");
@@ -49,9 +49,8 @@ public class Eating: IInteraction
                 return;
             }
 
-            // villager.hunger.IncreaseHunger(foodItem.NutritionValue);
-            villager.RemoveItem(foodItem);
 
+            foodItem.Use(villager);
             string currentHunger = villager.hunger.CurrentHunger.ToString();
             Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} finished their {foodName}. And their new hunger is {currentHunger}");
 
