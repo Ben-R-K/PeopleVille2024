@@ -1,6 +1,6 @@
 ﻿using PeopleVilleEngine.Villagers;
 using PeopleVilleBankSystem;
-using System;
+using LocationsEngine;
 
 namespace JobSystem
 {
@@ -11,17 +11,19 @@ namespace JobSystem
         public bool IsMale { get; set; }
         public int TimeSpent { get; set; }
         public string AccountNumber { get; set; }
+        public ILocation WorkLocation { get; set; } 
 
         private static Random random = new Random();
         private readonly BankSystem _bankSystem;
 
-        public JobDetails(AdultVillager villager, BankSystem bankSystem)
+        public JobDetails(AdultVillager villager, BankSystem bankSystem, ILocation workLocation)
         {
             Building = "Job";
             IsMale = villager.IsMale;
             Salary = GenerateSalary(IsMale);
             TimeSpent = 0; // Initialize with 0 hours
             _bankSystem = bankSystem;
+            WorkLocation = workLocation; // Assign the work location
 
             // Create a bank account for the villager if they don't already have one
             AccountNumber = AddAccountAndGetNumber(villager.FirstName + " " + villager.LastName);

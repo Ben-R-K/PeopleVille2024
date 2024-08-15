@@ -58,22 +58,28 @@ public class TimerClass
 
             if (minutes != _minutes){
                 _minutes = minutes;
-                foreach (var subscriber in OnMinuteChange){
-                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                lock(OnMinuteChange){
+                    foreach (var subscriber in OnMinuteChange){
+                        Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                    }
                 }
             }
 
             if (hours != _hours){
                 _hours = hours;
-                foreach (var subscriber in OnHourChange){
-                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                lock(OnHourChange){
+                    foreach (var subscriber in OnHourChange){
+                        Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                    }
                 }
             }
 
             if (days != _days){
                 _days = days;
-                foreach (var subscriber in OnDayChange){
-                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                lock(OnDayChange){
+                    foreach (var subscriber in OnDayChange){
+                        Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                    }
                 }
             }
         }

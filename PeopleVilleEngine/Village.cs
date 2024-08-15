@@ -52,14 +52,11 @@ public class Village
 
         var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(villagers);
         var villageCreators = LoadVillagerCreatorFactories();
         Console.ResetColor();
         Console.WriteLine();
 
-        Console.WriteLine("Creating");
         CreateVillagers(villagers, villageCreators);
-        Console.WriteLine("Created");
     }
 
     public string SubscribeToVillagerSpawn(Action<BaseVillager> subscriber)
@@ -76,11 +73,12 @@ public class Village
         for (int i = 0; i < villagers; i++)
         {
             BaseVillager villager;
+            bool continueCreating;
             do
             {
-                villager = villageCreators[villageCreatorindex].CreateVillager(this);
+                (villager, continueCreating) = villageCreators[villageCreatorindex].CreateVillager(this);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
-            } while (villager == null);
+            } while (villager == null && continueCreating == false);
 
             foreach (Action<BaseVillager> action in OnVillagerSpawn.Values)
             {
