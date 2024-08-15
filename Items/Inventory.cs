@@ -89,5 +89,27 @@ namespace Items
 
             items.Concat(main.GiveStartItems());
         }
+
+        public IItem BuyItem(string type, int balance)
+        {
+            List<IItem> foodItems = _items.FindAll(item => item.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
+
+            if (foodItems == null || foodItems.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                int randomIndex = new Random().Next(0, foodItems.Count);
+
+                IItem item = foodItems[randomIndex];
+
+                if (item.Price < balance)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }

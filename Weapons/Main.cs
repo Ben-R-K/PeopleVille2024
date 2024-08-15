@@ -18,7 +18,7 @@ namespace Weapons
 
 
 
-        public void Use() // Default method for using an food item
+        public void Use(dynamic entity) // Default method for using an food item
         {
             try
             {

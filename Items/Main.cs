@@ -37,7 +37,16 @@ namespace Items
 
         private IItem GetFoodItem()
         {
-            return _loadedItems.Find(item => item.Type.Equals("Food", StringComparison.OrdinalIgnoreCase));
+            if (_loadedItems == null)
+            {
+                return null;
+            }
+            else
+            {
+                return _loadedItems.Find(item => item != null && item.Type != null && item.Type.Equals("Food", StringComparison.OrdinalIgnoreCase));
+            }
         }
+
+
     }
 }

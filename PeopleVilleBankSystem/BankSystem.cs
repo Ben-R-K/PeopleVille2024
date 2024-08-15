@@ -1,8 +1,10 @@
-﻿using WorldTimer;
-namespace PeopleVilleBankSystem;
+﻿namespace PeopleVilleBankSystem;
+using WorldTimer;
+
 
 public class BankSystem
 {
+    private string _name { get; set; }
     private List<Account> _accounts { get; set; }
     private string _applyInterestGUID { get; set; }
     private string _printAllAccountsGUID { get; set; }
@@ -11,7 +13,7 @@ public class BankSystem
     {
         _accounts = new List<Account>();
 
-        _applyInterestGUID = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
+        _applyInterestGUID = _guid = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
         _printAllAccountsGUID = timerClass.Subscribe(PrintAllAccounts, TimerClass.SubscribtionTypes.Hour);
     }
 
@@ -79,6 +81,8 @@ public class BankSystem
                 account.ApplyInterest();
             }
 
+            Console.WriteLine("Interest applied to all accounts.");
+        }
             Console.WriteLine("Interest applied to all accounts.");
         }
     }

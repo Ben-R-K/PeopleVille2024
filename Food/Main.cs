@@ -12,7 +12,7 @@ namespace Food
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Type { get { return "bag"; } }
+        public string Type { get { return "Food"; } }
         public double Price { get; set; }
         public double Weight { get; set; }
         public int Nutrition { get; set; }
