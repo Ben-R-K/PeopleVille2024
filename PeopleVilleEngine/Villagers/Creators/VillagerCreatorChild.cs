@@ -8,6 +8,7 @@ public class VillagerCreatorChild : IVillagerCreator
     {
         var child = new ChildVillager(village);
         child.Home = FindHome(village);
+        if (child.Home != null) return false;
         child.Home.LivingHere += 1;
 
         var random = RNG.GetInstance();

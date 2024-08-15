@@ -24,9 +24,6 @@ public class Village
         ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
         FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
 
-        residentialBuildingscreator.Savebuldings();
-        funktionalBuildingscreator.SaveBuildings();
-
         residentialBuildingscreator.CreateBuildings();
         funktionalBuildingscreator.CreateBuildings();
 
