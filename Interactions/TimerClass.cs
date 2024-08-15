@@ -6,9 +6,10 @@ public class TimerClass
     private int _seconds;
     private int _minutes;
     private int _hours;
-    private List<Action<int, int, int>> OnMinuteChange; // Sends the time to the subscribers as hours, minutes, seconds
-    private List<Action<int, int, int>> OnHourChange; // Sends the time to the subscribers as hours, minutes, seconds
-    private List<Action<int, int, int>> OnDayChange; // Sends the time to the subscribers as hours, minutes, seconds
+    private int _days;
+    private Dictionary<string, Action<int, int, int, string>> OnMinuteChange;
+    private Dictionary<string, Action<int, int, int, string>> OnHourChange;
+    private Dictionary<string, Action<int, int, int, string>> OnDayChange;
 
     public enum SubscribtionTypes
     {
@@ -19,9 +20,10 @@ public class TimerClass
 
     public override string ToString()
     {
-        string hours = _hours < 10 ? $"0{_hours}" : _hours.ToString();
-        string minutes = _minutes < 10 ? $"0{_minutes}" : _minutes.ToString();
-        string seconds = _seconds < 10 ? $"0{_seconds}" : _seconds.ToString();
+        string hours = (_seconds/3600%24).ToString().PadLeft(2, '0');
+        string minutes = (_seconds/60%60).ToString().PadLeft(2, '0');
+        string seconds = (_seconds%60).ToString().PadLeft(2, '0');
+        // return $"{hours}:{minutes}:{seconds}";
         return $"{hours}:{minutes}:{seconds}";
     }
 
@@ -30,53 +32,80 @@ public class TimerClass
         _seconds = 0;
         _minutes = 0;
         _hours = 0;
-        OnHourChange = new List<Action<int, int, int>>();
-        OnMinuteChange = new List<Action<int, int, int>>();
-        OnDayChange = new List<Action<int, int, int>>();
-        Task.Run(() => UpdateTime()); 
+        OnHourChange = new Dictionary<string, Action<int, int, int, string>> ();
+        OnMinuteChange = new Dictionary<string, Action<int, int, int, string>> ();
+        OnDayChange = new Dictionary<string, Action<int, int, int, string>> ();
+        Task.Run(() => UpdateTime());
     }
 
     public void UpdateTime()
     {
         while (true) {
             Thread.Sleep(1000);
-            if (_seconds + speedUp >= 60){
-                if (_minutes + (speedUp/60) >= 60){
-                    if (_hours + (speedUp/3600) >= 24){
-                        _hours = 0;
-                        OnDayChange.ForEach(subscriber => subscriber(_hours, _minutes, _seconds));
-                    }
-                    else{
-                        OnHourChange.ForEach(subscriber => subscriber(_hours, _minutes, _seconds));
-                        _hours += speedUp/3600;
-                    }
-                } else {
-                    _minutes += speedUp/60;
-                    OnMinuteChange.ForEach(subscriber => subscriber(_hours, _minutes, _seconds));
+            _seconds += speedUp;
+
+            int hours = _seconds/3600%24;
+            int minutes = _seconds/60%60;
+            int seconds = _seconds%60;
+            int days = _seconds/86400;
+            Console.WriteLine(_seconds);
+
+            if (minutes != _minutes){
+                _minutes = minutes;
+                foreach (var subscriber in OnMinuteChange){
+                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
                 }
-            } else {
-                _seconds += speedUp;
             }
 
+            if (hours != _hours){
+                _hours = hours;
+                foreach (var subscriber in OnHourChange){
+                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                }
+            }
+
+            if (days != _days){
+                _days = days;
+                foreach (var subscriber in OnDayChange){
+                    Task.Run(() => {subscriber.Value(hours, minutes, seconds, subscriber.Key);});
+                }
+            }
         }
     }
 
 
-    public void Subscribe(Action<int, int, int> subscriber, SubscribtionTypes subscribtionType)
+    public string Subscribe(Action<int, int, int, string> subscriber, SubscribtionTypes subscribtionType)
     {
+        string guid = Guid.NewGuid().ToString();
         if (subscribtionType == SubscribtionTypes.Day){
-            OnDayChange.Add(subscriber);
-            return;
+            OnDayChange.Add(guid.ToString(), subscriber);
+            return guid;
         }
 
         if (subscribtionType == SubscribtionTypes.Hour){
-            OnHourChange.Add(subscriber);
-            return;
+            OnHourChange.Add(guid.ToString(), subscriber);
+            return guid;
         }
 
         if (subscribtionType == SubscribtionTypes.Minute){
-            OnMinuteChange.Add(subscriber);
-            return;
+            OnMinuteChange.Add(guid.ToString(), subscriber);
+            return guid;
+        }
+        return guid;
+    }
+
+    public void Unsubscribe(string guid, SubscribtionTypes subscribtionType)
+    {
+        if (subscribtionType == SubscribtionTypes.Day){
+            OnDayChange.Remove(guid);
+        }
+
+        if (subscribtionType == SubscribtionTypes.Hour){
+            OnHourChange.Remove(guid);
+        }
+
+        if (subscribtionType == SubscribtionTypes.Minute){
+            OnMinuteChange.Remove(guid);
         }
     }
 }

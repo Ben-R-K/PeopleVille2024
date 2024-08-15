@@ -7,13 +7,13 @@ Console.WriteLine("PeopleVille");
 
 // A timer to keep track of the time in the village
 TimerClass worldTimer = new TimerClass();
+
 //Create village
 var village = new Village();
 Console.WriteLine(village.ToString());
 
-InteractionCreator interactionCreator = new InteractionCreator();
+InteractionCreator interactionCreator = new InteractionCreator(village, worldTimer, RNG.GetInstance());
 interactionCreator.LoadInteractions();
-interactionCreator.Interactions[0].Execute(village, village.Villagers[0]);
 
 
 //Print locations with villagers to screen
@@ -25,4 +25,9 @@ foreach (var location in village.Locations)
         locationStatus += $" {villager}";
     }
     Console.WriteLine(locationStatus);
+}
+
+while (true){
+    Thread.Sleep(1000);
+    Console.WriteLine(worldTimer.ToString());
 }
