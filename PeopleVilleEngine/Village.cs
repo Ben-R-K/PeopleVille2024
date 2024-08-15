@@ -18,7 +18,6 @@ public class Village
     {
         OnVillagerSpawn = new Dictionary<string, Action<BaseVillager>>();
         Console.WriteLine("Creating villager");
-        SetupVillage();
     }
 
     private void CreateVillage()
