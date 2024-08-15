@@ -11,7 +11,7 @@ namespace Items
         public double Weight { get; set; }
 
 
-        public void Use()
+        public void Use(dynamic entity)
         {
             //This depends on item
         }

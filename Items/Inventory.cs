@@ -1,4 +1,5 @@
 using Items.Interfaces;
+using Items;
 
 namespace Items
 {
@@ -12,8 +13,11 @@ namespace Items
         public Inventory(int Age)
         {
             _items = new List<IItem>();
+            
 
             Random random = new Random();
+
+            ProvideStartItems(new Main());
 
             int AgeFactor = CalculateAgeFactor(Age);
 
@@ -77,6 +81,13 @@ namespace Items
         {
             _items.Clear();
             _currentWeight = 0;
+        }
+
+        private void ProvideStartItems(Main main)
+        {
+            List<IItem > items = new List<IItem>();
+
+            items.Concat(main.GiveStartItems());
         }
     }
 }
