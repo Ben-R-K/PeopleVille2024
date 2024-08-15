@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using PeopleVilleBankSystem;
 using WorldTimer;
+using LocationsEngine;
 
 public class JobScheduler
 {
@@ -14,12 +15,12 @@ public class JobScheduler
     private readonly Dictionary<AdultVillager, IJob> _villagerJobs;
     private readonly BankSystem _bankSystem;
 
-    public JobScheduler(Village village, TimerClass timer, BankSystem bankSystem)
+    public JobScheduler(Village village, TimerClass timer, BankSystem bankSystem, ILocation theCompanyLocation)
     {
         _village = village;
         _timer = timer;
         _bankSystem = bankSystem;
-        _jobFactory = new JobFactory(_bankSystem);
+        _jobFactory = new JobFactory(_bankSystem, theCompanyLocation); 
         _villagerJobs = new Dictionary<AdultVillager, IJob>();
         SubscribeToTimer();
     }
@@ -28,7 +29,6 @@ public class JobScheduler
     {
         _timer.Subscribe(OnHourChange, TimerClass.SubscribtionTypes.Hour);
     }
-
 
     private void OnHourChange(int hours, int minutes, int seconds, string guid)
     {
@@ -51,7 +51,8 @@ public class JobScheduler
                 var job = _jobFactory.CreateJob(villager);
                 _villagerJobs[villager] = job;
                 villager.IsWorking = true;
-                Console.WriteLine($"Assigned job to villager: {villager.FirstName} {villager.LastName}");
+                villager.CurrentLocation = (job as JobDetails)?.WorkLocation;
+                Console.WriteLine($"Assigned job to villager: {villager.FirstName} {villager.LastName}, Location: {villager.CurrentLocation?.Name}");
             }
             else
             {
@@ -59,6 +60,7 @@ public class JobScheduler
                 if (job != null && !villager.IsWorking)
                 {
                     villager.IsWorking = true;
+                    villager.CurrentLocation = job.WorkLocation; 
                     job.TimeSpent++;
                 }
             }
@@ -76,7 +78,8 @@ public class JobScheduler
                 {
                     villager.IsWorking = false;
                     job.PaySalary();
-                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Total Time Spent: {job.TimeSpent} hours, Salary: {job.Salary}");
+                    villager.CurrentLocation = villager.Home;
+                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Salary: {job.Salary}");
                 }
             }
         }
