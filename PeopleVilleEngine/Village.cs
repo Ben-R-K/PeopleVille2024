@@ -20,7 +20,7 @@ public class Village
         Console.WriteLine("Creating villager");
     }
 
-    private void CreateVillage()
+    public void CreateVillage()
     {
         ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
         FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
