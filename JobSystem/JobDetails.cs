@@ -24,10 +24,8 @@ namespace JobSystem
             TimeSpent = 0; // Initialize with 0 hours
             _bankSystem = bankSystem;
             WorkLocation = workLocation; // Assign the work location
-
+            AccountNumber = villager.GetAccountNumber();
             // Create a bank account for the villager if they don't already have one
-            AccountNumber = AddAccountAndGetNumber(villager.FirstName + " " + villager.LastName);
-            villager.SetAccountNumber(AccountNumber);
         }
 
         private double GenerateSalary(bool isMale)
@@ -45,13 +43,6 @@ namespace JobSystem
         public void PaySalary()
         {
             _bankSystem.Deposit(AccountNumber, Salary);
-        }
-
-        private string AddAccountAndGetNumber(string accountHolder)
-        {
-            // Simulate the AddAccount method returning a string
-            string accountNumber = _bankSystem.AddAccount(accountHolder);
-            return accountNumber; // Generate a new GUID as the account number
         }
     }
 }
