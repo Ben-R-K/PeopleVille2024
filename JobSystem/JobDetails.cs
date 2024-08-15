@@ -10,7 +10,6 @@ namespace JobSystem
         public double Salary { get; set; }
         public bool IsMale { get; set; }
         public int TimeSpent { get; set; }
-        public bool IsWorking { get; set; }
         public string AccountNumber { get; set; }
 
         private static Random random = new Random();
@@ -22,7 +21,6 @@ namespace JobSystem
             IsMale = villager.IsMale;
             Salary = GenerateSalary(IsMale);
             TimeSpent = 0; // Initialize with 0 hours
-            IsWorking = true; // Initialize as working when job is created
             _bankSystem = bankSystem;
 
             // Create a bank account for the villager if they don't already have one
