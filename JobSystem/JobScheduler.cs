@@ -18,9 +18,9 @@ public class JobScheduler
     {
         _village = village;
         _timer = timer;
+        _bankSystem = bankSystem;
         _jobFactory = new JobFactory(_bankSystem);
         _villagerJobs = new Dictionary<AdultVillager, IJob>();
-        _bankSystem = bankSystem;
         SubscribeToTimer();
     }
 
@@ -50,14 +50,15 @@ public class JobScheduler
             {
                 var job = _jobFactory.CreateJob(villager);
                 _villagerJobs[villager] = job;
+                villager.IsWorking = true;
                 Console.WriteLine($"Assigned job to villager: {villager.FirstName} {villager.LastName}");
             }
             else
             {
                 var job = _villagerJobs[villager] as JobDetails;
-                if (job != null && !job.IsWorking)
+                if (job != null && !villager.IsWorking)
                 {
-                    job.IsWorking = true;
+                    villager.IsWorking = true;
                     job.TimeSpent++;
                 }
             }
@@ -71,11 +72,11 @@ public class JobScheduler
             if (_villagerJobs.ContainsKey(villager))
             {
                 var job = _villagerJobs[villager] as JobDetails;
-                if (job != null && job.IsWorking)
+                if (job != null && villager.IsWorking)
                 {
-                    job.IsWorking = false;
+                    villager.IsWorking = false;
                     job.PaySalary();
-                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Salary: {job.Salary}");
+                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Total Time Spent: {job.TimeSpent} hours, Salary: {job.Salary}");
                 }
             }
         }
