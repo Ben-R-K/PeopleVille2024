@@ -1,7 +1,4 @@
-﻿using Items;
-using PeopleVilleEngine;
-
-namespace Food.SimpleFood
+﻿namespace Food.SimpleFood
 {
     internal class Cheese : Food
     {
@@ -16,13 +13,15 @@ namespace Food.SimpleFood
             Weight = 0.01;
             Nutrition = 2;
         }
-        
+
         public void use(BaseVillager villager)
         {
             try
             {
                 Cheese cheese = new Cheese();
                 villager.hunger.IncreaseHunger(cheese.Nutrition);
+                villager.RemoveItem(cheese);
+
             }
             catch (Exception e)
             {
