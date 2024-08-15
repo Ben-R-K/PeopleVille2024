@@ -72,7 +72,7 @@ public class JobScheduler
                 {
                     job.IsWorking = false;
                     job.PaySalary();
-                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Total Time Spent: {job.TimeSpent} hours, Salary: {job.Salary}");
+                    Console.WriteLine($"Stopped work for villager: {villager.FirstName} {villager.LastName}, Salary: {job.Salary}");
                 }
             }
         }
