@@ -5,6 +5,7 @@ using HungerSystem.Interfaces;
 using Items;
 using Items.Interfaces;
 using WorldTimer;
+using BankSystem;
 
 namespace EatingAbility;
 
@@ -35,8 +36,24 @@ public class Eating: IInteraction
         IItem foodItem = villager.GetItemByType("Food");
         bool hasFood = foodItem != null;
         if (!hasFood){
-            Console.WriteLine($"{villager.ToString()} has no food to eat");
-            return;
+            Account account = BankSystem.GetAccount(villager.BankAccountNumber)
+            double balance = account.GetBalance();
+
+            IItem foodItem = villager.inventory.BuyItem("Food", balance);
+            if (foodItem == null){
+                Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} has no food to eat");
+                return;
+            } else if (villager.IsBusy){
+                Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is at work, and can't work");
+                return;
+            }
+
+            FunktionalBuilding jobBuilding = village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket); 
+            villager.CurrentLocation = jobBuilding;
+            inventory.AddItem(foodItem);
+
+            Thread.Sleep(2000);
+            villager.CurrentLocation = villager.Home;
         }
 
         string foodName = foodItem.Name;

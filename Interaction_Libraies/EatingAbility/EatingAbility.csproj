@@ -12,5 +12,7 @@
     <ProjectReference Include="..\..\HungerSystem\HungerSystem.csproj" />
     <ProjectReference Include="..\..\items\items.csproj" />
     <ProjectReference Include="..\..\WorldTimer\WorldTimer.csproj" />
+    <ProjectReference Include="..\..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
+    <ProjectReference Include="..\..\LocationsEngine\LocationsEngine.csproj" />
   </ItemGroup>
 </Project>

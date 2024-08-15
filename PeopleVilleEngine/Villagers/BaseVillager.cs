@@ -14,7 +14,7 @@ public abstract class BaseVillager
     public ResidentialBuilding? Home {  get; set; }
     public bool IsBusy;
     public Hunger hunger;
-    private Inventory _inventory;
+    public Inventory inventory;
 
     protected BaseVillager(Village village)
     {
@@ -23,22 +23,22 @@ public abstract class BaseVillager
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
         IsBusy = false;
         hunger = new Hunger(this);
-        _inventory = new Inventory(Age);
+        inventory = new Inventory(Age);
     }
 
     public IItem GetItemByName(string name)
     {
-        return _inventory.GetItemByName(name);
+        return inventory.GetItemByName(name);
     }
 
     public IItem GetItemByType(string type)
     {
-        return _inventory.getItemByType(type);
+        return inventory.getItemByType(type);
     }
 
     public void RemoveItem(IItem item)
     {
-        _inventory.RemoveItem(item);
+        inventory.RemoveItem(item);
     }
 
     public override string ToString()
