@@ -4,12 +4,15 @@ namespace PeopleVilleBankSystem;
 public class BankSystem
 {
     private List<Account> _accounts { get; set; }
+    private string _applyInterestGUID { get; set; }
+    private string _printAllAccountsGUID { get; set; }
 
     public BankSystem(TimerClass timerClass)
     {
         _accounts = new List<Account>();
 
-        timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
+        _applyInterestGUID = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
+        _printAllAccountsGUID = timerClass.Subscribe(PrintAllAccounts, TimerClass.SubscribtionTypes.Hour);
     }
 
     public void AddAccount(string name)
@@ -64,22 +67,28 @@ public class BankSystem
 
     private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds, string guid)
     {
-        foreach (Account account in _accounts)
+        if (guid == _applyInterestGUID)
         {
-            account.ApplyInterest();
-        }
+            foreach (Account account in _accounts)
+            {
+                account.ApplyInterest();
+            }
 
-        Console.WriteLine("Interest applied to all accounts.");
+            Console.WriteLine("Interest applied to all accounts.");
+        }
     }
 
-    public void PrintAllAccounts()
+    public void PrintAllAccounts(int hours, int minutes, int seconds, string guid)
     {
-        foreach (Account account in _accounts)
+        if (guid == _printAllAccountsGUID && hours % 4 == 0)
         {
-            Console.WriteLine($"Account Number: {account.GetAccountNumber()}");
-            Console.WriteLine($"Account Holder: {account.GetAccountHolder()}");
-            Console.WriteLine($"Balance: {account.GetBalance()}");
-            Console.WriteLine();
+            foreach (Account account in _accounts)
+            {
+                Console.WriteLine($"Account Number: {account.GetAccountNumber()}");
+                Console.WriteLine($"Account Holder: {account.GetAccountHolder()}");
+                Console.WriteLine($"Balance: {account.GetBalance()}");
+                Console.WriteLine();
+            }
         }
     }
 }
