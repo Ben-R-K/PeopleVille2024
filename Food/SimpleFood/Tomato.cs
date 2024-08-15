@@ -4,10 +4,9 @@ using PeopleVilleEngine;
 
 namespace Food.SimpleFood
 {
-    internal class Tomato : Food
+    public class Tomato : Food
     {
         public Food TomatoItem { get; private set; }
-
         public Tomato()
         {
             ID = 1; 

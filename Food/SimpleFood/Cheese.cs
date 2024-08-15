@@ -1,6 +1,6 @@
 ﻿namespace Food.SimpleFood
 {
-    internal class Cheese : Food
+    public class Cheese : Food
     {
 
         public Food TomatoItem { get; private set; }

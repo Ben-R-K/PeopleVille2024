@@ -12,7 +12,7 @@ public class VillagerCreatorAdult : IVillagerCreator
         //Find house
         adult.Home = FindHome(village);
         if(adult.Home == null) return null;
-        adult.Home.LivingHere += 1;
+        adult.Home.LivingHere++;
 
         adult.IsMale = Convert.ToBoolean(random.Next(0, 1));
             adult.LastName = village.VillagerNameLibrary.GetRandomFirstName(adult.IsMale);
@@ -30,8 +30,12 @@ public class VillagerCreatorAdult : IVillagerCreator
     {
         var random = RNG.GetInstance();
 
+        foreach(ResidentialBuilding building in village.Homes.Where(p => p.LivingHere < p.MaxPopulation).ToList()){
+            Console.WriteLine($"Building: {building.LivingHere} / {building.MaxPopulation}");
+        }
+
         List<ResidentialBuilding> potentialHomes = village.Homes.Where(p => p.LivingHere < p.MaxPopulation).ToList();
         if(potentialHomes.Count == 0) return null;
-        return potentialHomes[random.Next(0, potentialHomes.Count)];
+        return potentialHomes[random.Next(0, potentialHomes.Count - 1)];
     }
 }

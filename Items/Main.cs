@@ -11,13 +11,12 @@ namespace Items
         {
             _instantiateItems = new InstantiateItems();
             _loadedItems = new List<IItem>();
-            List<IItem> loadedItems = new List<IItem>();
-            loadedItems = _instantiateItems.LoadItems();
+            _loadedItems = _instantiateItems.LoadItems();
         }
 
         public List<IItem> GiveStartItems() // This method is to provide the villager with one food item and 3 random items
         {
-            List<IItem> items = new List<IItem>();
+            List<IItem> items = new List<IItem> {};
 
             int itemAmount = _loadedItems.Count;
             Random random = new Random();

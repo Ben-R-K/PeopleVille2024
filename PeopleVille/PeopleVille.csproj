@@ -15,4 +15,9 @@
     <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!-- <Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' /> -->
+		<Exec Command='cp -R "../ItemModules/" "$(TargetDir)ItemModules"' />
+	</Target>
+
 </Project>

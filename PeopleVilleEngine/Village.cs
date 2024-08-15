@@ -20,7 +20,7 @@ public class Village
         Console.WriteLine("Creating villager");
     }
 
-    private void CreateVillage()
+    public void CreateVillage()
     {
         ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
         FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
@@ -52,12 +52,14 @@ public class Village
 
         var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
         Console.ForegroundColor = ConsoleColor.Red;
-
+        Console.WriteLine(villagers);
         var villageCreators = LoadVillagerCreatorFactories();
         Console.ResetColor();
         Console.WriteLine();
 
+        Console.WriteLine("Creating");
         CreateVillagers(villagers, villageCreators);
+        Console.WriteLine("Created");
     }
 
     public string SubscribeToVillagerSpawn(Action<BaseVillager> subscriber)
@@ -67,7 +69,7 @@ public class Village
         return guid;
     }
 
-    private void CreateVillagers(int villagers, List<IVillagerCreator> villageCreators)
+    public void CreateVillagers(int villagers, List<IVillagerCreator> villageCreators)
     {
         int villageCreatorindex = 0;
 
@@ -79,8 +81,12 @@ public class Village
                 villager = villageCreators[villageCreatorindex].CreateVillager(this);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
             } while (villager == null);
-        }
 
+            foreach (Action<BaseVillager> action in OnVillagerSpawn.Values)
+            {
+                Task.Run(() => action(villager));
+            }
+        }
         Console.ResetColor();
     }
 

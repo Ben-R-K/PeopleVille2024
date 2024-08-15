@@ -85,7 +85,7 @@ namespace Items
 
         private void ProvideStartItems(Main main)
         {
-            List<IItem > items = new List<IItem>();
+            List<IItem > items = new List<IItem> {};
 
             items.Concat(main.GiveStartItems());
         }
