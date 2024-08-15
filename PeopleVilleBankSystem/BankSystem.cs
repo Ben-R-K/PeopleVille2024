@@ -1,5 +1,5 @@
-﻿namespace PeopleVilleBankSystem;
-using Interactions;
+﻿using WorldTimer;
+namespace PeopleVilleBankSystem;
 
 public class BankSystem
 {
@@ -62,7 +62,7 @@ public class BankSystem
         GetAccount(accountNumber).Withdraw(amount);
     }
 
-    private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds)
+    private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds, string guid)
     {
         foreach (Account account in _accounts)
         {

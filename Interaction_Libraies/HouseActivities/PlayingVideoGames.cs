@@ -3,16 +3,31 @@ using PeopleVilleEngine;
 using WorldTimer;
 
 namespace HouseActivities {
-    public class CleaningToilet: IInteraction
+    public class PlayingVideoGames: IInteraction
     {
         private RNG _rng;
         private Village _village;
         private TimerClass _worldTimer;
         public bool IsActivity { get { return true; } }
-        public bool IsFemaleAllowed { get { return true; } }
-        public bool IsMaleAllowed { get { return false; } }
+        public bool IsFemaleAllowed { get { return false; } }
+        public bool IsMaleAllowed { get { return true; } }
 
-        public CleaningToilet(RNG rng, Village village, TimerClass worldTimer)
+        private List<string> VideoGames = new List<string> {
+            "FIFA 2023",
+            "FIFA 2024",
+            "Call of Duty",
+            "Fortnite",
+            "Minecraft",
+            "GTA V",
+            "Red Dead Redemption 2",
+            "The Witcher 3",
+            "Cyberpunk 2077",
+            "Assassin's Creed Valhalla",
+            "The Last of Us Part II",
+            "Ghost of Tsushima",
+        };
+
+        public PlayingVideoGames(RNG rng, Village village, TimerClass worldTimer)
         {
             _rng = rng;
             _village = village;
@@ -29,15 +44,16 @@ namespace HouseActivities {
             if (!isHome){
                 return;
             }
-
-            Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} started cleaning the toilet");
+            
+            string videoGame = VideoGames[_rng.Next(0, VideoGames.Count + 1)];
+            Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} started playing {videoGame}");
             _worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
                 if (time > timePast){
                     timePast++;
                     return;
                 }
 
-                Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()}'s toilet is clean - And shiny");
+                Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} didn't want to play {videoGame} anymore");
                 villager.IsBusy = false;
                 _worldTimer.Unsubscribe(id, TimerClass.SubscribtionTypes.Minute);
             }, TimerClass.SubscribtionTypes.Minute);

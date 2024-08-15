@@ -32,6 +32,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bag", "Bag\Bag.csproj", "{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldTimer", "WorldTimer\WorldTimer.csproj", "{EE90A8F7-1333-4790-A596-7B4D997157CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleVilleBankSystem", "PeopleVilleBankSystem\PeopleVilleBankSystem.csproj", "{EE90A8F7-1333-4790-A596-7B4D997157CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
