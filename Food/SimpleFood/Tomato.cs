@@ -26,7 +26,7 @@ namespace Food.SimpleFood
             }
             catch (Exception e)
             {
-                Console.WriteLine("You can't eat that"); // If the food can't be eaten
+                Console.WriteLine($"{villager.FirstName} {villager.LastName} can't eat that tomato"); // If the food can't be eaten
             }
         }
     }
