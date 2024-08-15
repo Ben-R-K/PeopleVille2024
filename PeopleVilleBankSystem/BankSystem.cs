@@ -1,17 +1,20 @@
 ﻿namespace PeopleVilleBankSystem;
 using Interactions;
+using WorldTimer;
+
 
 public class BankSystem
 {
     private string _name { get; set; }
     private List<Account> _accounts { get; set; }
+    private string _guid { get; set; }
 
     public BankSystem(string name, TimerClass timerClass)
     {
         _name = name;
         _accounts = new List<Account>();
 
-        timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
+        _guid = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
     }
 
     public void AddAccount(string name)
@@ -64,14 +67,17 @@ public class BankSystem
         GetAccount(accountNumber).Withdraw(amount);
     }
 
-    private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds)
+    private void ApplyInterestToAllAccounts(int hours, int minutes, int seconds, string guid)
     {
-        foreach (Account account in _accounts)
+       if (guid == _guid)
         {
-            account.ApplyInterest();
-        }
+            foreach (Account account in _accounts)
+            {
+                account.ApplyInterest();
+            }
 
-        Console.WriteLine("Interest applied to all accounts.");
+            Console.WriteLine("Interest applied to all accounts.");
+        }
     }
 
     public void PrintAllAccounts()

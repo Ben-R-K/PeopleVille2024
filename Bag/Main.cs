@@ -17,7 +17,7 @@ namespace Bag
         public double Weight { get; set; }
 
 
-        public void Use()
+        public void Use(dynamic entity)
         {
             throw new NotImplementedException();
         }
