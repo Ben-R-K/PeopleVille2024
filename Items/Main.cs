@@ -15,17 +15,41 @@ namespace Items
         {
             _instantiateItems = new InstantiateItems();
             _loadedItems = new List<IItem>();
+            List<Item> loadedItems = new List<Item>();
+            loadedItems = _instantiateItems.LoadItems();
+
+            List<Item> GiveStartItem() // This method is to provide the villager with one food item and 3 random items
+            {
+                List<Item> item = new List<Item>();
+
+                int itemAmount = loadedItems.Count;
+                Random random = new Random();
+
+                int firstItem = random.Next(0, itemAmount);
+                int secondItem = random.Next(0, itemAmount);
+                int thirdItem = random.Next(0, itemAmount);
+
+
+                item.Add(loadedItems[firstItem]);
+                item.Add(loadedItems[secondItem]);
+                item.Add(loadedItems[thirdItem]);
+
+                item.Add(GetFoodItem());
+
+                return item;
+            }
+
+            Item GetFoodItem()
+            {
+                return loadedItems.Find(item => item.Type.Equals("Food", StringComparison.OrdinalIgnoreCase));
+            }
         }
 
-        public Item GiveStartItem() // This method is to provide the villager with one or more starting items
-        {
-
-            return new Item();
-        }
+        
 
         public List<Item> LoadAllItems() // This method is to load all items from the DLL's and returns them in a list
         {
-            Console.WriteLine("Loading items...");
+            //Console.WriteLine("Loading items...");
             List<Item> loadedItems = new List<Item>();
             loadedItems = _instantiateItems.LoadItems();
 
