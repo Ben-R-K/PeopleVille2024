@@ -2,7 +2,6 @@
 using Items;
 using Items.Interfaces;
 using PeopleVilleEngine;
-using PeopleVilleBankSystem;
 
 public abstract class BaseVillager
 {
@@ -18,7 +17,7 @@ public abstract class BaseVillager
     private Inventory _inventory;
     private string _accountNumber;
 
-    protected BaseVillager(Village village)
+    protected BaseVillager(Village village, string accountNumber)
     {
         _village = village;
         IsMale = RNG.GetInstance().Next(0, 2) == 0;
@@ -26,6 +25,7 @@ public abstract class BaseVillager
         IsBusy = false;
         hunger = new Hunger(this);
         _inventory = new Inventory(Age);
+        _accountNumber = accountNumber;
     }
 
     public IItem GetItemByName(string name)
@@ -41,11 +41,6 @@ public abstract class BaseVillager
     public void RemoveItem(IItem item)
     {
         _inventory.RemoveItem(item);
-    }
-
-    public void SetAccountNumber(string accountNumber)
-    {
-        _accountNumber = accountNumber;
     }
 
     public string GetAccountNumber()
