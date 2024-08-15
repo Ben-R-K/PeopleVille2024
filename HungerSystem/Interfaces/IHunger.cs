@@ -7,7 +7,6 @@
 
         event EventHandler OnStarvation;
 
-        bool IsWorking { get; set; }
 
         int DecreaseHunger(int amount);
         void IncreaseHunger(int amount);

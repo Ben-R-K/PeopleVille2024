@@ -38,9 +38,7 @@ public class Hunger : IHunger
         //hungerTimer.Enabled = true;
     }
 
-//    public Hunger.IsWorking() {
 
-//} 
 
     public string Subscribe(Action<dynamic> subscriber)
     {
@@ -56,7 +54,7 @@ public class Hunger : IHunger
 
         int newHunger;
 
-        if (IsWorking)
+        if (_villager.IsWorking)
         {
             // Hvis villager arbejder, falder hunger med en ekstra faktor, f.eks. 1.5 gange så hurtigt
             newHunger = DecreaseHunger((int)(baseDecreaseAmount * 1.5));
@@ -72,7 +70,7 @@ public class Hunger : IHunger
         }
     }
 
-    public bool IsWorking { get; set; }
+
 
     public int DecreaseHunger(int amount)
     {
