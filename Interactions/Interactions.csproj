@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command='cp -R "$(ProjectDir)interaction_dlls" "$(TargetDir)interaction_dlls"' />
+		<!-- <Exec Command='cp -R "$(ProjectDir)interaction_dlls" "$(TargetDir)interaction_dlls"' /> -->
 	</Target>
 
 </Project>

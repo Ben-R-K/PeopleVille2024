@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Items.Interfaces;
 
 namespace Items
 {
@@ -12,9 +13,9 @@ namespace Items
             _pluginsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ItemModules");
         }
 
-        public List<Item> LoadItems()
+        public List<IItem> LoadItems()
         {
-            var items = new List<Item>();
+            var items = new List<IItem>();
 
             if (Directory.Exists(_pluginsFolder))
             {

@@ -8,6 +8,6 @@
         double Price { get; set; }
         double Weight { get; set; } // in kg
 
-        public void Use();
+        public void Use(dynamic entity);
     }
 }

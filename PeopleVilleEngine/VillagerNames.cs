@@ -28,7 +28,7 @@ public class VillagerNames
         Console.WriteLine(Directory.GetFiles("lib"));
         if (!File.Exists(jsonFile))
             throw new FileNotFoundException(jsonFile);
-        
+
         string jsonData = File.ReadAllText(jsonFile);
         var namesData = JsonSerializer.Deserialize<NamesData>(jsonData);
         _maleFirstNames = namesData.MaleFirstNames;

@@ -1,8 +1,4 @@
-﻿
-
-
-
-using Items.Interfaces;
+﻿using Items.Interfaces;
 
 namespace Items
 {
@@ -15,44 +11,34 @@ namespace Items
         {
             _instantiateItems = new InstantiateItems();
             _loadedItems = new List<IItem>();
-        }
-
-        public Item GiveStartItem() // This method is to provide the villager with one or more starting items
-        {
-
-            return new Item();
-        }
-
-        public List<Item> LoadAllItems() // This method is to load all items from the DLL's and returns them in a list
-        {
-            Console.WriteLine("Loading items...");
-            List<Item> loadedItems = new List<Item>();
+            List<IItem> loadedItems = new List<IItem>();
             loadedItems = _instantiateItems.LoadItems();
-
-            return loadedItems;
         }
 
-        public void UnloadItems() // This method is to unload all items from the list
+        public List<IItem> GiveStartItems() // This method is to provide the villager with one food item and 3 random items
         {
-            Console.WriteLine("Unloading items...");
-            _loadedItems.Clear();
+            List<IItem> items = new List<IItem>();
+
+            int itemAmount = _loadedItems.Count;
+            Random random = new Random();
+
+            int firstItem = random.Next(0, itemAmount);
+            int secondItem = random.Next(0, itemAmount);
+            int thirdItem = random.Next(0, itemAmount);
+
+
+            items.Add(_loadedItems[firstItem]);
+            items.Add(_loadedItems[secondItem]);
+            items.Add(_loadedItems[thirdItem]);
+
+            items.Add(GetFoodItem());
+
+            return items;
         }
 
-        public void ReloadItems() // This method is to remove all items from the list and then load them again from the DLL's
+        private IItem GetFoodItem()
         {
-            UnloadItems();
-            LoadAllItems();
-        }
-
-        public IItem GetItemByName(string name) // This method is to get an item by its name
-        {
-            if (_loadedItems.Count == 0)
-            {
-                Console.WriteLine("No items loaded.");
-                return null;
-            }
-
-            return _loadedItems.Find(item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return _loadedItems.Find(item => item.Type.Equals("Food", StringComparison.OrdinalIgnoreCase));
         }
     }
 }
