@@ -4,7 +4,6 @@ using PeopleVilleEngine;
 using Interactions;
 using WorldTimer;
 using PeopleVilleBankSystem;
-using BankSystem;
 
 
 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory.ToString());
