@@ -1,6 +1,8 @@
 ﻿using PeopleVilleEngine;
 using Interactions;
 using WorldTimer;
+using PeopleVilleBankSystem;
+using BankSystem;
 
 
 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory.ToString());
@@ -8,6 +10,9 @@ Console.WriteLine("PeopleVille");
 
 // A timer to keep track of the time in the village
 TimerClass worldTimer = TimerClass.GetInstance();
+
+// Setup bank system
+BankSystem bankService = new BankSystem(worldTimer);
 
 //Create village
 var village = new Village();
@@ -20,7 +25,7 @@ interactionCreator.LoadInteractions();
 foreach (var location in village.Locations)
 {
     var locationStatus = location.Name;
-    foreach(var villager in location.Villagers().OrderByDescending(v => v.Age))
+    foreach (var villager in location.Villagers().OrderByDescending(v => v.Age))
     {
         locationStatus += $" {villager}";
     }
