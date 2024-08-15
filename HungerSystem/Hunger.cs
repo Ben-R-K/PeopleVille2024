@@ -2,6 +2,7 @@
 using HungerSystem.Interfaces;
 using WorldTimer;
 
+
 public class Hunger : IHunger
 {
     private int maxHunger = 100;
@@ -25,7 +26,7 @@ public class Hunger : IHunger
         TimerClass WorldTimer = TimerClass.GetInstance();
         WorldTimer.Subscribe((int hours, int minutes, int seconds, string guid) =>
         {
-            if (minutes %4 != 0)
+            if (minutes % 4 != 0)
             {
                 return;
             }
@@ -36,6 +37,10 @@ public class Hunger : IHunger
         //hungerTimer.AutoReset = true;
         //hungerTimer.Enabled = true;
     }
+
+//    public Hunger.IsWorking() {
+
+//} 
 
     public string Subscribe(Action<dynamic> subscriber)
     {

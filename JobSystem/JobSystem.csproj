@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+    <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
   </ItemGroup>
 
 </Project>
