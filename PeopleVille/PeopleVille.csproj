@@ -10,6 +10,9 @@
   <ItemGroup>
     <ProjectReference Include="..\LocationsEngine\LocationsEngine.csproj" />
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+    <ProjectReference Include="..\Interactions\Interactions.csproj" />
+    <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
+    <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
   </ItemGroup>
 
 </Project>

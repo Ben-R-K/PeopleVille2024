@@ -1,14 +1,16 @@
-﻿
+﻿using HungerSystem;
+using HungerSystem.Interfaces;
+
 using LocationsEngine;
 
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorChild : IVillagerCreator
 {
-    public bool CreateVillager(Village village)
+    public BaseVillager CreateVillager(Village village)
     {
         var child = new ChildVillager(village);
         child.Home = FindHome(village);
-        if (child.Home != null) return false;
+        if (child.Home != null) return null;
         child.Home.LivingHere += 1;
 
         var random = RNG.GetInstance();
@@ -19,7 +21,10 @@ public class VillagerCreatorChild : IVillagerCreator
         child.LastName = child.Parent.LastName;
 
         village.Villagers.Add(child);
-        return true;
+
+        child.hunger = new Hunger(child);
+
+        return child;
     }
 
     private ResidentialBuilding? FindHome(Village village)

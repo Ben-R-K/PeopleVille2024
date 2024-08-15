@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -17,6 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HungerSystem\HungerSystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Items\Items.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="lib\names.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -25,8 +33,10 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)lib $(TargetDir)\lib /I /Y" />
-  </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!-- <Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' /> -->
+		<Exec Command='cp -R "$(ProjectDir)lib" "$(TargetDir)lib"' />
+	</Target>
+
 
 </Project>

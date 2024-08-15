@@ -14,14 +14,14 @@
           "PeopleVilleVillagerHomeless.dll": {}
         }
       },
-      "LocationsEngine/1.0.0": {
+      "HungerSystem/1.0.0": {
         "runtime": {
-          "LocationsEngine.dll": {}
+          "HungerSystem.dll": {}
         }
       },
       "PeopleVilleEngine/1.0.0": {
         "dependencies": {
-          "LocationsEngine": "1.0.0"
+          "HungerSystem": "1.0.0"
         },
         "runtime": {
           "PeopleVilleEngine.dll": {}
@@ -35,7 +35,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "LocationsEngine/1.0.0": {
+    "HungerSystem/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

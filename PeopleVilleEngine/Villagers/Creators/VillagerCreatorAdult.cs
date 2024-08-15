@@ -1,9 +1,11 @@
-﻿using LocationsEngine;
+﻿using System.Runtime.CompilerServices;
+using LocationsEngine;
 using PeopleVilleEngine;
 namespace PeopleVilleEngine.Villagers.Creators;
+using HungerSystem;
 public class VillagerCreatorAdult : IVillagerCreator
 {
-    public bool CreateVillager(Village village)
+    public BaseVillager CreateVillager(Village village)
     {
         var random = RNG.GetInstance();
         var adult = new AdultVillager(village, random.Next(18, 40));
@@ -18,7 +20,10 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         //Add to village
         village.Villagers.Add(adult);
-        return true;
+
+        adult.hunger = new Hunger(adult);
+
+        return adult;
     }
 
     private ResidentialBuilding? FindHome(Village village)
