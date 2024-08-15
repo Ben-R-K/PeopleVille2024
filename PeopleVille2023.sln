@@ -29,12 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weapons", "Weapons\Weapons.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Food", "Food\Food.csproj", "{39609BC8-AC08-4C17-8FF4-F3549F74FD28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bag", "Bag\Bag.csproj", "{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bag", "Bag\Bag.csproj", "{73903E8B-A824-49B0-B9E1-ED5A4D54F0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldTimer", "WorldTimer\WorldTimer.csproj", "{EE90A8F7-1333-4790-A596-7B4D997157CD}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleVilleBankSystem", "PeopleVilleBankSystem\PeopleVilleBankSystem.csproj", "{EE90A8F7-1333-4790-A596-7B4D997157CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldTimer", "WorldTimer\WorldTimer.csproj", "{EE90A8F7-1333-4790-A596-7B4D997157CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationsEngine", "LocationsEngine\LocationsEngine.csproj", "{70574310-DB15-4600-A2FA-D43588B382DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleVilleBankSystem", "PeopleVilleBankSystem\PeopleVilleBankSystem.csproj", "{61D267C9-A91D-45A4-93C6-F8EE25BF2FFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationsEngine", "LocationsEngine\LocationsEngine.csproj", "{70574310-DB15-4600-A2FA-D43588B382DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,10 +55,6 @@ Global
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{369E85AA-2550-41C1-AEBE-0FCDB08B0ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{369E85AA-2550-41C1-AEBE-0FCDB08B0ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{369E85AA-2550-41C1-AEBE-0FCDB08B0ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{369E85AA-2550-41C1-AEBE-0FCDB08B0ECF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A217C60-ABA9-4A17-AE0D-260F9B4648C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,6 +95,10 @@ Global
 		{EE90A8F7-1333-4790-A596-7B4D997157CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE90A8F7-1333-4790-A596-7B4D997157CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE90A8F7-1333-4790-A596-7B4D997157CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D267C9-A91D-45A4-93C6-F8EE25BF2FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D267C9-A91D-45A4-93C6-F8EE25BF2FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D267C9-A91D-45A4-93C6-F8EE25BF2FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D267C9-A91D-45A4-93C6-F8EE25BF2FFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{70574310-DB15-4600-A2FA-D43588B382DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{70574310-DB15-4600-A2FA-D43588B382DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70574310-DB15-4600-A2FA-D43588B382DD}.Release|Any CPU.ActiveCfg = Release|Any CPU

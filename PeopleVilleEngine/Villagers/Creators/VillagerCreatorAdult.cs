@@ -11,7 +11,7 @@ public class VillagerCreatorAdult : IVillagerCreator
         var adult = new AdultVillager(village, random.Next(18, 40));
         //Find house
         adult.Home = FindHome(village);
-        if(adult.Home == null) return false;
+        if(adult.Home == null) return null;
         adult.Home.LivingHere += 1;
 
         adult.IsMale = Convert.ToBoolean(random.Next(0, 1));

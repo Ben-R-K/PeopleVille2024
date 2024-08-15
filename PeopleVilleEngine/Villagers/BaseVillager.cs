@@ -1,6 +1,7 @@
-﻿using LocationsEngine
+﻿using LocationsEngine;
 using Items;
 using Items.Interfaces;
+using PeopleVilleEngine;
 
 public abstract class BaseVillager
 {
