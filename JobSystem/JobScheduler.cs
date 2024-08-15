@@ -1,8 +1,6 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Villagers;
 using JobSystem;
-using System.Linq;
-using System.Collections.Generic;
 using Interactions;
 using PeopleVilleBankSystem;
 
