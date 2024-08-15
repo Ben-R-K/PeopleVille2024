@@ -1,24 +1,25 @@
-﻿using PeopleVilleEngine.Locations;
-using HungerSystem;
+﻿using HungerSystem;
 using HungerSystem.Interfaces;
+
+using LocationsEngine;
 
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorChild : IVillagerCreator
 {
     public BaseVillager CreateVillager(Village village)
     {
-        var home = FindHome(village);
-        if (home == null) return null;
+        var child = new ChildVillager(village);
+        child.Home = FindHome(village);
+        if (child.Home == null) return null;
+        child.Home.LivingHere += 1;
 
         var random = RNG.GetInstance();
-        var child = new ChildVillager(village);
 
-        var first = home.Villagers().First(v => v.GetType() == typeof(AdultVillager));
-        child.LastName = first.LastName;
+        var potentialParents = village.Villagers.Where(V => V.GetType() == typeof(AdultVillager)).Where(V => V.Home == child.Home).ToList();
 
+        child.Parent = (AdultVillager)potentialParents[random.Next(0, potentialParents.Count)];
+        child.LastName = child.Parent.LastName;
 
-        home.Villagers().Add(child);
-        child.Home = home;
         village.Villagers.Add(child);
 
         child.hunger = new Hunger(child);
@@ -26,18 +27,13 @@ public class VillagerCreatorChild : IVillagerCreator
         return child;
     }
 
-    private IHouse? FindHome(Village village)
+    private ResidentialBuilding? FindHome(Village village)
     {
         var random = RNG.GetInstance();
 
-        var potentialHomes = village.Locations.Where(p => p.GetType().IsAssignableTo(typeof(IHouse)))
-           .Where(p => p.Villagers().Count(v => v.GetType() == typeof(AdultVillager)) >= 2)
-           .Where(p => ((IHouse)p).Population < ((IHouse)p).MaxPopulation).ToList();
-
-        if (potentialHomes.Count == 0)
-            return null;
-
-        return (IHouse)potentialHomes[random.Next(0, potentialHomes.Count)];
+        List<ResidentialBuilding> potentialHomes = village.Homes.Where(p => p.LivingHere < p.MaxPopulation).ToList();
+        if (potentialHomes.Count == 0) return null;
+        return potentialHomes[random.Next(0, potentialHomes.Count)];
     }
 
 }

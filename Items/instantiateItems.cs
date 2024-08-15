@@ -26,13 +26,13 @@ namespace Items
                     try
                     {
                         var assembly = Assembly.LoadFrom(dll);
-
+                        
                         var itemTypes = assembly.GetTypes()
-                            .Where(t => typeof(Item).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+                            .Where(t => typeof(IItem).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 
                         foreach (var type in itemTypes)
                         {
-                            Item itemInstance = (Item)Activator.CreateInstance(type);
+                            IItem itemInstance = (IItem)Activator.CreateInstance(type);
                             items.Add(itemInstance);
                         }
                     }
@@ -42,7 +42,6 @@ namespace Items
                     }
                 }
             }
-
             return items;
         }
     }

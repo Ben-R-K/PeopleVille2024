@@ -8,7 +8,7 @@ namespace Food
 
     }
 
-    internal class Food : IItem //New food class that implements IItem for more organized code and to override the default use method
+    public class Food : IItem //New food class that implements IItem for more organized code and to override the default use method
     {
         public int ID { get; set; }
         public string Name { get; set; }

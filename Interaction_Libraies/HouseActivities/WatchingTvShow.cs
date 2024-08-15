@@ -9,6 +9,8 @@ namespace HouseActivities {
         private Village _village;
         private TimerClass _worldTimer;
         public bool IsActivity { get { return true; } }
+        public bool IsFemaleAllowed { get { return true; } }
+        public bool IsMaleAllowed { get { return true; } }
         private string[] adultTvShows = new string[] {
             "The Office",
             "Friends",

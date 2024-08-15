@@ -9,6 +9,8 @@ namespace OutDoorFitness {
         private Village _village;
         private TimerClass _worldTimer;
         public bool IsActivity { get { return true; } }
+        public bool IsFemaleAllowed { get { return true; } }
+        public bool IsMaleAllowed { get { return true; } }
 
         public Jumping(RNG rng, Village village, TimerClass worldTimer)
         {

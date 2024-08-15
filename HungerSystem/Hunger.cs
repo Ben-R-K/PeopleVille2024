@@ -32,10 +32,6 @@ public class Hunger : IHunger
             }
             OnTimedEvent();
         }, TimerClass.SubscribtionTypes.Minute);
-        //hungerTimer = new System.Timers.Timer(5000); // Reducerer hunger hver 5. sekund
-        //hungerTimer.Elapsed += OnTimedEvent;
-        //hungerTimer.AutoReset = true;
-        //hungerTimer.Enabled = true;
     }
 
 

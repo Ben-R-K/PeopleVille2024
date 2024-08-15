@@ -6,6 +6,8 @@ namespace Interactions;
 
 public interface IInteraction
 {
+    public bool IsFemaleAllowed { get; }
+    public bool IsMaleAllowed { get; }
     public bool IsActivity { get; }
     public void Execute(BaseVillager villager);
 }
@@ -34,7 +36,7 @@ public class InteractionCreator
 
     private void RunInteractions(){
         _worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
-            if (minute != 30 && minute != 0){
+            if (minute != 30 && minute != 0 && minute != 15 && minute != 45){
                 return;
             }
             
@@ -49,7 +51,7 @@ public class InteractionCreator
                 }
 
                 // Don't randomly run not activities
-                while (!interaction.IsActivity){
+                while (!interaction.IsActivity && ((interaction.IsFemaleAllowed && !randomVillager.IsMale) || (interaction.IsMaleAllowed && randomVillager.IsMale))){
                     interaction = interactions[_rng.Next(0, interactions.Count + 1)];
                     Thread.Sleep(100);
                 }

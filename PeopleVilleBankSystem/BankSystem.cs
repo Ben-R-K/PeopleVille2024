@@ -1,5 +1,4 @@
 ﻿namespace PeopleVilleBankSystem;
-using Interactions;
 using WorldTimer;
 
 
@@ -9,9 +8,8 @@ public class BankSystem
     private List<Account> _accounts { get; set; }
     private string _guid { get; set; }
 
-    public BankSystem(string name, TimerClass timerClass)
+    public BankSystem(TimerClass timerClass)
     {
-        _name = name;
         _accounts = new List<Account>();
 
         _guid = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
