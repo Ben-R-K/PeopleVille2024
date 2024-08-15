@@ -6,7 +6,7 @@ using Items;
 using Items.Interfaces;
 using WorldTimer;
 
-namespace food;
+namespace EatingAbility;
 
 public class Eating: IInteraction
 {

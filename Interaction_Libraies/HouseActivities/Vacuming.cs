@@ -25,7 +25,7 @@ namespace HouseActivities {
             int timePast = 0;
 
             // TODO: Check if villager is Home
-            bool isHome = true;
+            bool isHome = villager.CurrentLocation == villager.Home;
             if (!isHome){
                 return;
             }

@@ -20,10 +20,8 @@ var village = new Village();
 
 // Possible to subscribe the villager spawner
 
-Console.WriteLine("dsa");
 village.CreateVillage();
 Console.WriteLine(village.ToString());
-Console.WriteLine("dsdas");
 
 InteractionCreator interactionCreator = new InteractionCreator(village, worldTimer, RNG.GetInstance());
 interactionCreator.LoadInteractions();

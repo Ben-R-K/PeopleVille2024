@@ -6,11 +6,11 @@ using LocationsEngine;
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorChild : IVillagerCreator
 {
-    public BaseVillager CreateVillager(Village village)
+    public (BaseVillager, bool) CreateVillager(Village village)
     {
         var child = new ChildVillager(village);
         child.Home = FindHome(village);
-        if (child.Home == null) return null;
+        if (child.Home == null) return (null, true);
         child.Home.LivingHere += 1;
 
         var random = RNG.GetInstance();
@@ -24,7 +24,7 @@ public class VillagerCreatorChild : IVillagerCreator
 
         child.hunger = new Hunger(child);
 
-        return child;
+        return (child, false);
     }
 
     private ResidentialBuilding? FindHome(Village village)

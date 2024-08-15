@@ -5,13 +5,13 @@ namespace PeopleVilleEngine.Villagers.Creators;
 using HungerSystem;
 public class VillagerCreatorAdult : IVillagerCreator
 {
-    public BaseVillager CreateVillager(Village village)
+    public (BaseVillager, bool) CreateVillager(Village village)
     {
         var random = RNG.GetInstance();
         var adult = new AdultVillager(village, random.Next(18, 40));
         //Find house
         adult.Home = FindHome(village);
-        if(adult.Home == null) return null;
+        if(adult.Home == null) return (null, true);
         adult.Home.LivingHere++;
 
         adult.IsMale = Convert.ToBoolean(random.Next(0, 1));
@@ -23,16 +23,12 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         adult.hunger = new Hunger(adult);
 
-        return adult;
+        return (adult, false);
     }
 
     private ResidentialBuilding? FindHome(Village village)
     {
         var random = RNG.GetInstance();
-
-        foreach(ResidentialBuilding building in village.Homes.Where(p => p.LivingHere < p.MaxPopulation).ToList()){
-            Console.WriteLine($"Building: {building.LivingHere} / {building.MaxPopulation}");
-        }
 
         List<ResidentialBuilding> potentialHomes = village.Homes.Where(p => p.LivingHere < p.MaxPopulation).ToList();
         if(potentialHomes.Count == 0) return null;
