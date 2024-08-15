@@ -22,7 +22,12 @@ public class BankSystem
         double interestRate = random.NextDouble() * (0.1 - 0.01) + 0.01;
 
         string accountNumber = Guid.NewGuid().ToString();
-        Account account = new Account(accountNumber, name, 0, interestRate);
+
+        int balance = random.Next(0, 10000);
+
+        Console.WriteLine($"Account: {name} created with balance {balance}");
+
+        Account account = new Account(accountNumber, name, balance, interestRate);
         _accounts.Add(account);
     }
 
