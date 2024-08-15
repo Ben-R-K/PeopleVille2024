@@ -4,6 +4,7 @@ using PeopleVilleEngine;
 using Interactions;
 using WorldTimer;
 using PeopleVilleBankSystem;
+using JobSystem;
 
 
 Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory.ToString());
@@ -18,7 +19,7 @@ BankSystem bankService = new BankSystem(worldTimer);
 //Create village
 var village = new Village();
 
-// Possible to subscribe the villager spawner
+// Possible to subscribe the villager spawn
 
 village.CreateVillage();
 Console.WriteLine(village.ToString());
@@ -36,6 +37,12 @@ foreach (var location in village.Locations)
     }
     Console.WriteLine(locationStatus);
 }
+
+FunktionalBuilding jobBuilding = village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.TheCompany); 
+if (jobBuilding == null){
+    throw new Exception("No job building found");
+}
+JobScheduler jobScheduler = new JobScheduler(village, worldTimer, bankService, jobBuilding);
 
 
 while (true){

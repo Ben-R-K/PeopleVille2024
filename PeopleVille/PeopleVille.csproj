@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Interactions\Interactions.csproj" />
     <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
     <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
+    <ProjectReference Include="..\JobSystem\JobSystem.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
