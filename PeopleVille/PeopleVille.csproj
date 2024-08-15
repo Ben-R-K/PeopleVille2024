@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocationsEngine\LocationsEngine.csproj" />
     <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
+    <ProjectReference Include="..\Interactions\Interactions.csproj" />
+    <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
+    <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!-- <Exec Command='xcopy /E /I "$(ProjectDir)lib" "$(TargetDir)lib" /Y' /> -->
+		<Exec Command='cp -R "../ItemModules/" "$(TargetDir)ItemModules"' />
+	</Target>
 
 </Project>

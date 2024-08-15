@@ -1,44 +1,90 @@
 ﻿namespace PeopleVilleEngine;
-using PeopleVilleEngine.Villagers.Creators;
-using PeopleVilleEngine.Locations;
 using System.Reflection;
+using PeopleVilleEngine.Villagers.Creators;
+using LocationsEngine;
 using System.Linq;
+using LocationsEngine.Creators;
 
 public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
     public List<BaseVillager> Villagers { get; } = new();
-    public List<ILocation> Locations { get; } = new();
+    public List<FunktionalBuilding> Locations { get; } = new();
+    public List<ResidentialBuilding> Homes { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
+    private Dictionary<string, Action<BaseVillager>> OnVillagerSpawn;
 
     public Village()
     {
+        OnVillagerSpawn = new Dictionary<string, Action<BaseVillager>>();
         Console.WriteLine("Creating villager");
-        CreateVillage();
     }
 
-
-    private void CreateVillage()
+    public void CreateVillage()
     {
-        var villagers = _random.Next(10, 24);
-        Console.ForegroundColor = ConsoleColor.Red;
+        ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
+        FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
 
+        residentialBuildingscreator.CreateBuildings();
+        funktionalBuildingscreator.CreateBuildings();
+
+        int BuildingCount = 5;
+        for (int i = 0; i < BuildingCount; i++)
+        {
+            ResidentialBuilding RB = residentialBuildingscreator.RBs[_random.Next(0, residentialBuildingscreator.RBs.Count)];
+            var locationStatus = RB.Name;
+            Homes.Add(RB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        foreach (FunktionalBuilding FB in funktionalBuildingscreator.FBs)
+        {
+            var locationStatus = FB.Name;
+            Locations.Add(FB);
+            Console.WriteLine(locationStatus + " build.");
+        }
+
+        int livingSpace = 0;
+        foreach(ResidentialBuilding RB in Homes)
+        {
+            livingSpace += RB.MaxPopulation;
+        }
+
+        var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
+        Console.ForegroundColor = ConsoleColor.Red;
         var villageCreators = LoadVillagerCreatorFactories();
         Console.ResetColor();
         Console.WriteLine();
 
+        CreateVillagers(villagers, villageCreators);
+    }
+
+    public string SubscribeToVillagerSpawn(Action<BaseVillager> subscriber)
+    {
+        string guid = Guid.NewGuid().ToString();
+        OnVillagerSpawn.Add(guid, subscriber);
+        return guid;
+    }
+
+    public void CreateVillagers(int villagers, List<IVillagerCreator> villageCreators)
+    {
         int villageCreatorindex = 0;
 
         for (int i = 0; i < villagers; i++)
         {
-            var created = false;
+            BaseVillager villager;
+            bool continueCreating;
             do
             {
-                created = villageCreators[villageCreatorindex].CreateVillager(this);
+                (villager, continueCreating) = villageCreators[villageCreatorindex].CreateVillager(this);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
-            } while (!created);
-        }
+            } while (villager == null && continueCreating == false);
 
+            foreach (Action<BaseVillager> action in OnVillagerSpawn.Values)
+            {
+                Task.Run(() => action(villager));
+            }
+        }
         Console.ResetColor();
     }
 
@@ -76,6 +122,6 @@ public class Village
 
     public override string ToString()
     {
-        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
+        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.Home == null)} are homeless.";
     }
 }
