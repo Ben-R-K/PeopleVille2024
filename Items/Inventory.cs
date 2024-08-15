@@ -98,17 +98,22 @@ namespace Items
             {
                 return null;
             }
-            else
+
+            foodItems.Sort((x, y) => x.Price.CompareTo(y.Price));
+
+            if (foodItems[0].Price > balance)
             {
-                int randomIndex = new Random().Next(0, foodItems.Count);
+                return null;
+            }
 
-                IItem item = foodItems[randomIndex];
-
-                if (item.Price < balance)
+            for (int i = 0; i < foodItems.Count; i++)
+            {
+                if (foodItems[i].Price <= balance)
                 {
-                    return item;
+                    return foodItems[i];
                 }
             }
+
             return null;
         }
     }

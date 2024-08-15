@@ -13,7 +13,7 @@ public class BankSystem
     {
         _accounts = new List<Account>();
 
-        _applyInterestGUID = _guid = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
+        _applyInterestGUID = timerClass.Subscribe(ApplyInterestToAllAccounts, TimerClass.SubscribtionTypes.Day);
         _printAllAccountsGUID = timerClass.Subscribe(PrintAllAccounts, TimerClass.SubscribtionTypes.Hour);
     }
 
