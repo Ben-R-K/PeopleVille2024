@@ -2,6 +2,7 @@
 using Items;
 using Items.Interfaces;
 using PeopleVilleEngine;
+using PeopleVilleBankSystem;
 
 public abstract class BaseVillager
 {
@@ -11,10 +12,11 @@ public abstract class BaseVillager
     public bool IsMale { get; set; }
     private Village _village;
     public ILocation? CurrentLocation { get; set; } = null;
-    public ResidentialBuilding? Home {  get; set; }
+    public ResidentialBuilding? Home { get; set; }
     public bool IsBusy;
     public Hunger hunger;
     private Inventory _inventory;
+    private string _accountNumber;
 
     protected BaseVillager(Village village)
     {
@@ -39,6 +41,16 @@ public abstract class BaseVillager
     public void RemoveItem(IItem item)
     {
         _inventory.RemoveItem(item);
+    }
+
+    public void SetAccountNumber(string accountNumber)
+    {
+        _accountNumber = accountNumber;
+    }
+
+    public string GetAccountNumber()
+    {
+        return _accountNumber;
     }
 
     public override string ToString()

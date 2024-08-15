@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeopleVilleEngine\PeopleVilleEngine.csproj" />
     <ProjectReference Include="..\WorldTimer\WorldTimer.csproj" />
   </ItemGroup>
 

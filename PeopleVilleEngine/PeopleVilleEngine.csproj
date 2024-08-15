@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PeopleVilleBankSystem\PeopleVilleBankSystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="lib\names.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
