@@ -89,4 +89,9 @@ public class Hunger : IHunger
     {
         IncreaseHunger(food.NutritionValue);
     }
+
+    public override string ToString()
+    {
+        return "test";
+    }
 }

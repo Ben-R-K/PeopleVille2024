@@ -2,11 +2,11 @@
 {
     public interface IItem
     {
-        int ID { get; set; }
-        string Name { get; set; }
+        int ID { get; }
+        string Name { get; }
         string Type { get; }
-        double Price { get; set; }
-        double Weight { get; set; } // in kg
+        double Price { get; }
+        double Weight { get; } // in kg
 
         public void Use(dynamic entity);
     }

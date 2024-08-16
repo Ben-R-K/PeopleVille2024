@@ -9,15 +9,18 @@ namespace Items
         private int _maxWeight;
         private double _currentWeight;
         private int _slots;
+        private Main _main;
 
         public Inventory(int Age)
         {
             _items = new List<IItem>();
-            
+
 
             Random random = new Random();
 
-            ProvideStartItems(new Main());
+            _main = new Main();
+
+            ProvideStartItems(_main);
 
             int AgeFactor = CalculateAgeFactor(Age);
 
@@ -56,7 +59,7 @@ namespace Items
         public void RemoveItem(IItem item)
         {
             if (!_items.Contains(item))
-                throw new Exception("Item not found");
+                return;
 
             _items.Remove(item);
             _currentWeight -= item.Weight;
@@ -85,36 +88,22 @@ namespace Items
 
         private void ProvideStartItems(Main main)
         {
-            List<IItem > items = new List<IItem> {};
+            List<IItem> items = new List<IItem> { };
 
             items.Concat(main.GiveStartItems());
         }
 
         public IItem BuyItem(string type, double balance)
         {
-            List<IItem> foodItems = _items.FindAll(item => item.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
-
+            List<IItem> foodItems = _main.LoadedItems.FindAll(item => item.Type.Equals(type, StringComparison.OrdinalIgnoreCase) && item.Price <= balance);
             if (foodItems == null || foodItems.Count == 0)
             {
                 return null;
             }
 
-            foodItems.Sort((x, y) => x.Price.CompareTo(y.Price));
+            Random random = new Random();
 
-            if (foodItems[0].Price > balance)
-            {
-                return null;
-            }
-
-            for (int i = 0; i < foodItems.Count; i++)
-            {
-                if (foodItems[i].Price <= balance)
-                {
-                    return foodItems[i];
-                }
-            }
-
-            return null;
+            return foodItems[random.Next(0, foodItems.Count)];
         }
     }
 }

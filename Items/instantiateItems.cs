@@ -10,7 +10,7 @@ namespace Items
         public InstantiateItems()
         {
             // Define the folder where the item-related DLLs are located
-            _pluginsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory/*, "ItemModules"*/);
+            _pluginsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ItemModules");
         }
 
         public List<IItem> LoadItems()
@@ -26,7 +26,7 @@ namespace Items
                     try
                     {
                         var assembly = Assembly.LoadFrom(dll);
-                        
+
                         var itemTypes = assembly.GetTypes()
                             .Where(t => typeof(IItem).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
 

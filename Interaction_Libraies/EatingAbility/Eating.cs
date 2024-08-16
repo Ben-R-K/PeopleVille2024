@@ -5,6 +5,8 @@ using Items.Interfaces;
 using WorldTimer;
 using PeopleVilleBankSystem;
 using LocationsEngine;
+using System.Runtime.InteropServices;
+using PeopleVilleEngine.Villagers;
 
 namespace EatingAbility;
 
@@ -23,13 +25,16 @@ public class Eating : IInteraction
         _worldTimer = worldTimer;
 
         // TODO: Subscribe to the villager spawning event. And then subscribe to the villager's hunger event
-        foreach (BaseVillager villager in _village.Villagers)
+
+        village.SubscribeToVillagerSpawn((BaseVillager villager) =>
         {
             villager.hunger.Subscribe((dynamic villager) =>
             {
+                if (villager.IsBusy) return;
+                villager.IsBusy = true;
                 Execute(villager);
             });
-        }
+        });
     }
 
     public void Execute(BaseVillager villager)
@@ -38,7 +43,9 @@ public class Eating : IInteraction
         bool hasFood = foodItem != null;
         if (!hasFood)
         {
-            Account account = BankSystem.GetInstance().GetAccount(villager.GetAccountNumber());
+            BankSystem bankService = BankSystem.GetInstance();
+            string accountNumber = villager.GetAccountNumber();
+            Account account = bankService.GetAccount(accountNumber);
             double balance = account.GetBalance();
 
             foodItem = villager.inventory.BuyItem("Food", balance);
@@ -47,18 +54,19 @@ public class Eating : IInteraction
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} has no food to eat");
                 return;
             }
-            else if (villager.IsBusy)
+            else if (villager.GetType() == typeof(AdultVillager) && ((AdultVillager)villager).IsWorking)
             {
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is at work, and can't work");
                 return;
             }
 
-            FunktionalBuilding jobBuilding = _village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket);
-            villager.CurrentLocation = jobBuilding;
+            FunktionalBuilding store = _village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket);
+            villager.CurrentLocation = store;
             villager.inventory.AddItem(foodItem);
 
-            Thread.Sleep(2000);
+            Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} bought a(n) {foodItem.Name} from the store");
             villager.CurrentLocation = villager.Home;
+            Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is back home");
         }
 
         string foodName = foodItem.Name;

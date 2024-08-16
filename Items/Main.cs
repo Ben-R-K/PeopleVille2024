@@ -6,6 +6,7 @@ namespace Items
     {
         private readonly InstantiateItems _instantiateItems;
         private List<IItem> _loadedItems;
+        public List<IItem> LoadedItems { get { return _loadedItems; } }
 
         public Main()
         {
