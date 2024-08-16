@@ -1,11 +1,10 @@
 ﻿using Interactions;
 using PeopleVilleEngine;
-using HungerSystem;
-using HungerSystem.Interfaces;
 using Items;
 using Items.Interfaces;
 using WorldTimer;
 using PeopleVilleBankSystem;
+using LocationsEngine;
 
 namespace EatingAbility;
 
@@ -42,7 +41,7 @@ public class Eating : IInteraction
             Account account = BankSystem.GetInstance().GetAccount(villager.GetAccountNumber());
             double balance = account.GetBalance();
 
-            IItem foodItem = villager.inventory.BuyItem("Food", balance);
+            foodItem = villager.inventory.BuyItem("Food", balance);
             if (foodItem == null)
             {
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} has no food to eat");
@@ -54,9 +53,9 @@ public class Eating : IInteraction
                 return;
             }
 
-            FunktionalBuilding jobBuilding = village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket);
+            FunktionalBuilding jobBuilding = _village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket);
             villager.CurrentLocation = jobBuilding;
-            inventory.AddItem(foodItem);
+            villager.inventory.AddItem(foodItem);
 
             Thread.Sleep(2000);
             villager.CurrentLocation = villager.Home;
