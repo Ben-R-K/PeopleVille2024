@@ -85,8 +85,7 @@ public class BankSystem
 
             Console.WriteLine("Interest applied to all accounts.");
         }
-            Console.WriteLine("Interest applied to all accounts.");
-        }
+        Console.WriteLine("Interest applied to all accounts.");
     }
 
     public void PrintAllAccounts(int hours, int minutes, int seconds, string guid)
