@@ -5,11 +5,11 @@ using HungerSystem.Interfaces;
 using Items;
 using Items.Interfaces;
 using WorldTimer;
-using BankSystem;
+using PeopleVilleBankSystem;
 
 namespace EatingAbility;
 
-public class Eating: IInteraction
+public class Eating : IInteraction
 {
     private RNG _rng;
     private Village _village;
@@ -24,8 +24,10 @@ public class Eating: IInteraction
         _worldTimer = worldTimer;
 
         // TODO: Subscribe to the villager spawning event. And then subscribe to the villager's hunger event
-        foreach (BaseVillager villager in _village.Villagers){
-            villager.hunger.Subscribe((dynamic villager) => {
+        foreach (BaseVillager villager in _village.Villagers)
+        {
+            villager.hunger.Subscribe((dynamic villager) =>
+            {
                 Execute(villager);
             });
         }
@@ -35,20 +37,24 @@ public class Eating: IInteraction
     {
         IItem foodItem = villager.GetItemByType("Food");
         bool hasFood = foodItem != null;
-        if (!hasFood){
-            Account account = BankSystem.GetAccount(villager.BankAccountNumber)
+        if (!hasFood)
+        {
+            Account account = BankSystem.GetInstance().GetAccount(villager.GetAccountNumber());
             double balance = account.GetBalance();
 
             IItem foodItem = villager.inventory.BuyItem("Food", balance);
-            if (foodItem == null){
+            if (foodItem == null)
+            {
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} has no food to eat");
                 return;
-            } else if (villager.IsBusy){
+            }
+            else if (villager.IsBusy)
+            {
                 Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is at work, and can't work");
                 return;
             }
 
-            FunktionalBuilding jobBuilding = village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket); 
+            FunktionalBuilding jobBuilding = village.Locations.OfType<FunktionalBuilding>().FirstOrDefault(l => l.LocationType == LocationTypes.Supermarket);
             villager.CurrentLocation = jobBuilding;
             inventory.AddItem(foodItem);
 
@@ -62,8 +68,10 @@ public class Eating: IInteraction
         int timePast = 0;
 
         Console.WriteLine($"{_worldTimer.ToString()}  --  {villager.ToString()} is eating a(n) {foodName}");
-        _worldTimer.Subscribe((int hour, int minute, int seconds, string id) => {
-            if (time > timePast){
+        _worldTimer.Subscribe((int hour, int minute, int seconds, string id) =>
+        {
+            if (time > timePast)
+            {
                 timePast++;
                 return;
             }

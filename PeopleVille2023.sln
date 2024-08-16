@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OutDoorFitness", "Interacti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobSystem", "JobSystem\JobSystem.csproj", "{631D7438-5F63-44BF-BE4A-D30ADA146B6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "food", "Interaction_Libraies\food\food.csproj", "{D565236F-D68A-4FFF-830A-01D417BF70E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EatingAbility", "Interaction_Libraies\EatingAbility\EatingAbility.csproj", "{D565236F-D68A-4FFF-830A-01D417BF70E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungerSystem", "HungerSystem\HungerSystem.csproj", "{755CE692-67BB-42F3-AC49-35C67117E1FC}"
 EndProject

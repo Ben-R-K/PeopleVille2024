@@ -4,10 +4,20 @@ using WorldTimer;
 
 public class BankSystem
 {
+    private static BankSystem? _bankSystem;
     private string _name { get; set; }
     private List<Account> _accounts { get; set; }
     private string _applyInterestGUID { get; set; }
     private string _printAllAccountsGUID { get; set; }
+
+    public static BankSystem GetInstance()
+    {
+        if (_bankSystem == null)
+        {
+            _bankSystem = new BankSystem(TimerClass.GetInstance());
+        }
+        return _bankSystem;
+    }
 
     public BankSystem(TimerClass timerClass)
     {
