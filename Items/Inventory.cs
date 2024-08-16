@@ -90,7 +90,7 @@ namespace Items
             items.Concat(main.GiveStartItems());
         }
 
-        public IItem BuyItem(string type, int balance)
+        public IItem BuyItem(string type, double balance)
         {
             List<IItem> foodItems = _items.FindAll(item => item.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
 
