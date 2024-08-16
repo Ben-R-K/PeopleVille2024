@@ -4,6 +4,7 @@ using PeopleVilleEngine.Villagers.Creators;
 using LocationsEngine;
 using System.Linq;
 using LocationsEngine.Creators;
+using PeopleVilleBankSystem;
 
 public class Village
 {
@@ -20,7 +21,7 @@ public class Village
         Console.WriteLine("Creating villager");
     }
 
-    public void CreateVillage()
+    public void CreateVillage(BankSystem bankService)
     {
         ResidentialBuildingsCreator residentialBuildingscreator = new ResidentialBuildingsCreator();
         FunktionalBuildingsCreator funktionalBuildingscreator = new FunktionalBuildingsCreator();
@@ -45,18 +46,18 @@ public class Village
         }
 
         int livingSpace = 0;
-        foreach(ResidentialBuilding RB in Homes)
+        foreach (ResidentialBuilding RB in Homes)
         {
             livingSpace += RB.MaxPopulation;
         }
 
-        var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace/1.1)); 
+        var villagers = _random.Next(Convert.ToInt32(livingSpace / 10), Convert.ToInt32(livingSpace / 1.1));
         Console.ForegroundColor = ConsoleColor.Red;
         var villageCreators = LoadVillagerCreatorFactories();
         Console.ResetColor();
         Console.WriteLine();
 
-        CreateVillagers(villagers, villageCreators);
+        CreateVillagers(villagers, villageCreators, bankService);
     }
 
     public string SubscribeToVillagerSpawn(Action<BaseVillager> subscriber)
@@ -66,7 +67,7 @@ public class Village
         return guid;
     }
 
-    public void CreateVillagers(int villagers, List<IVillagerCreator> villageCreators)
+    public void CreateVillagers(int villagers, List<IVillagerCreator> villageCreators, BankSystem bankService)
     {
         int villageCreatorindex = 0;
 
@@ -76,7 +77,7 @@ public class Village
             bool continueCreating;
             do
             {
-                (villager, continueCreating) = villageCreators[villageCreatorindex].CreateVillager(this);
+                (villager, continueCreating) = villageCreators[villageCreatorindex].CreateVillager(this, bankService);
                 villageCreatorindex = villageCreatorindex + 1 < villageCreators.Count ? villageCreatorindex + 1 : 0;
             } while (villager == null && continueCreating == false);
 

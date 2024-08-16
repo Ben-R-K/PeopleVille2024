@@ -21,7 +21,7 @@ var village = new Village();
 
 // Possible to subscribe the villager spawn
 
-village.CreateVillage();
+village.CreateVillage(bankService);
 Console.WriteLine(village.ToString());
 
 InteractionCreator interactionCreator = new InteractionCreator(village, worldTimer, RNG.GetInstance());

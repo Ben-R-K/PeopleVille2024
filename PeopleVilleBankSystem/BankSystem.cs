@@ -17,7 +17,7 @@ public class BankSystem
         _printAllAccountsGUID = timerClass.Subscribe(PrintAllAccounts, TimerClass.SubscribtionTypes.Hour);
     }
 
-    public void AddAccount(string name)
+    public string AddAccount(string name)
     {
         Random random = new Random();
 
@@ -31,6 +31,8 @@ public class BankSystem
 
         Account account = new Account(accountNumber, name, balance, interestRate);
         _accounts.Add(account);
+
+        return accountNumber;
     }
 
     public void RemoveAccount(string accountNumber)
